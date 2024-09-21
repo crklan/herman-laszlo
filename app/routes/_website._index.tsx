@@ -2,13 +2,15 @@ import type {LoaderFunctionArgs, MetaFunction} from '@remix-run/node'
 import {useLoaderData} from '@remix-run/react'
 import {useQuery} from '@sanity/react-loader'
 
-import {Records} from '~/components/Records'
+import background from '~/assets/background.png'
+import portrait from '~/assets/portrait.png'
+import {ImagePreview} from '~/components/ImagePreview'
+import {Button} from '~/components/ui/button'
 import type {loader as layoutLoader} from '~/routes/_website'
 import {loadQuery} from '~/sanity/loader.server'
 import {loadQueryOptions} from '~/sanity/loadQueryOptions.server'
-import {RECORDS_QUERY} from '~/sanity/queries'
-import type {RecordStub} from '~/types/record'
-import {recordStubsZ} from '~/types/record'
+import {PAINTING_QUERY} from '~/sanity/queries'
+import type {Painting} from '~/types/painting'
 
 export const meta: MetaFunction<
   typeof loader,
@@ -27,12 +29,14 @@ export const meta: MetaFunction<
 
 export const loader = async ({request}: LoaderFunctionArgs) => {
   const {options} = await loadQueryOptions(request.headers)
-  const query = RECORDS_QUERY
-  const params = {}
-  const initial = await loadQuery<RecordStub[]>(query, params, options).then(
+  const query = PAINTING_QUERY
+  const params = {
+    slug: 'dvojcici',
+  }
+  const initial = await loadQuery<Painting>(query, params, options).then(
     (res) => ({
       ...res,
-      data: res.data ? recordStubsZ.parse(res.data) : null,
+      data: res.data ? res.data : null,
     }),
   )
 
@@ -51,5 +55,54 @@ export default function Index() {
     initial,
   })
 
-  return data ? <Records records={data} /> : null
+  console.log(data)
+
+  return (
+    <div>
+      <div className="relative w-full h-[95vh]">
+        <img
+          className="h-full w-full object-cover"
+          alt="Landing page"
+          src={background}
+        />
+        <h1 className="text-8xl lg:text-[220px] font-display text-white absolute w-full text-center top-[30%]">
+          Laszlo Herman
+        </h1>
+      </div>
+      <div className="w-full min-h-screen bg-sky-600 grid grid-cols-12 p-12 py-16 lg:p-20 lg:py-24">
+        <div className="relative order-2 lg:order-1 col-span-12 lg:col-span-5 flex justify-center items-center">
+          <img
+            className="object-cover h-[90%] w-3/4 z-10 shadow-[-20px_20px_0_5px_rgba(255,255,255,1)] lg:shadow-[-30px_30px_0_5px_rgba(255,255,255,1)]"
+            src={portrait}
+            alt="Portrait of Laszlo"
+          />
+        </div>
+        <div className="order-1 lg:order-2 col-span-12 lg:col-start-7 lg:col-span-6 flex flex-col gap-12">
+          <div className="font-display text-5xl lg:text-7xl text-white mt-20">
+            O slikarju
+          </div>
+          <p className="text-lg lg:text-2xl font-light leading-7 lg:leading-10 text-white">
+            László Herman se je rodil leta 1961 v Gornjem Lakošu, v Lendavi. Na
+            začetku svoje umetniške poti je imela velik vpliv nanj fotografska
+            umetnost, kasneje pa se je njegovo zanimanje preusmerilo k
+            slikarstvu. Njegovi slikarski podvigi in študije obsegajo širok
+            tematski in motivni spekter: zgodovino, znanstveno-tehnično
+            revolucijo, manjšinsko bit, poglavja iz zgodovine lastne družine,
+            brezizhodnost malega človeka, ki je žrtev političnih manipulacij in
+            refleksije na globalizacijsko soodvisnost ...
+          </p>
+          <div>
+            <Button size="lg" variant="outline">
+              Preberi več
+            </Button>
+          </div>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-12 py-16 lg:p-20 lg:py-24">
+        <div className="grid gap-4">
+          <div>{data && <ImagePreview data={data} />}</div>
+        </div>
+      </div>
+    </div>
+  )
 }
