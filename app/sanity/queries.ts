@@ -36,3 +36,13 @@ export const RECORD_QUERY = groq`*[_type == "record" && slug.current == $slug][0
     duration
   }
 }`
+
+export const PAINTING_QUERY = groq`*[_type == "painting" && slug.current == $slug][0]{
+  ...,
+  id_,
+    _createdAt,
+    _updatedAt,
+    title,
+    "series": series->name,
+    "techniques": techniques->name
+}`

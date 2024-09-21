@@ -1,4 +1,4 @@
-import {Disc, Home, Tags, Users} from 'lucide-react'
+import {Home, Image, Tags, Users} from 'lucide-react'
 import type {
   DefaultDocumentNodeResolver,
   StructureResolver,
@@ -21,10 +21,9 @@ export const structure: StructureResolver = (S) =>
         .child(S.editor().id('home').schemaType('home').documentId('home')),
       S.divider(),
       // Document lists
-      S.documentTypeListItem('record').title('Records').icon(Disc),
-      S.documentTypeListItem('artist').title('Artists').icon(Users),
-      S.divider(),
-      S.documentTypeListItem('genre').title('Genres').icon(Tags),
+      S.documentTypeListItem('painting').title('Paintings').icon(Image),
+      S.documentTypeListItem('series').title('Series').icon(Users),
+      S.documentTypeListItem('technique').title('Techniques').icon(Tags),
     ])
 
 export const defaultDocumentNode: DefaultDocumentNodeResolver = (
