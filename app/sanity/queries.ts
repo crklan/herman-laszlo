@@ -46,3 +46,14 @@ export const PAINTING_QUERY = groq`*[_type == "painting" && slug.current == $slu
   "series": series->name,
   "techniques": techniques->name
 }`
+
+export const PAINTINGS_QUERY = groq`*[_type == "painting"]{
+  ...,
+  id_,
+  _createdAt,
+  _updatedAt,
+  title,
+  "series": series->name,
+  "techniques": techniques->name
+}
+| order(_createdAt desc)`

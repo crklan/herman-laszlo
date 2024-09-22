@@ -1,9 +1,10 @@
 import type {LoaderFunctionArgs, MetaFunction} from '@remix-run/node'
+import {Link} from '@remix-run/react'
 
 import portrait from '~/assets/portrait.png'
 import type {loader as layoutLoader} from '~/routes/_website'
 
-export const meta: MetaFunction<
+/* export const meta: MetaFunction<
   typeof loader,
   {
     'routes/_website': typeof layoutLoader
@@ -16,7 +17,7 @@ export const meta: MetaFunction<
   const title = [home?.title, home?.siteTitle].filter(Boolean).join(' | ')
 
   return [{title}]
-}
+} */
 
 export const loader = async ({request}: LoaderFunctionArgs) => {
   return null
@@ -58,6 +59,17 @@ export default function Index() {
             Obmejni veter, Potovanje v neznano, Sprehod po versajskem parku,
             Made in China ter Dolgo, vroče poletje v Lakošu.
           </p>
+        </div>
+        <div className="order-3 col-span-12 mt-16">
+          <h3 className="font-display text-5xl mb-4">Publications</h3>
+          <div>2024</div>
+          <ul>
+            <li>
+              <Link to="https://www.researchgate.net/profile/Laszlo_Herman">
+                https://www.researchgate.net/profile/Laszlo_Herman
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

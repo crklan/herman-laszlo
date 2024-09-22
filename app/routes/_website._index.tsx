@@ -1,15 +1,16 @@
 import type {LoaderFunctionArgs, MetaFunction} from '@remix-run/node'
-import {useLoaderData} from '@remix-run/react'
+import {Link, useLoaderData} from '@remix-run/react'
 import {useQuery} from '@sanity/react-loader'
 
 import background from '~/assets/background.png'
 import portrait from '~/assets/portrait.png'
 import {ImagePreview} from '~/components/ImagePreview'
+import {Mansory} from '~/components/Mansory'
 import {Button} from '~/components/ui/button'
 import type {loader as layoutLoader} from '~/routes/_website'
 import {loadQuery} from '~/sanity/loader.server'
 import {loadQueryOptions} from '~/sanity/loadQueryOptions.server'
-import {PAINTING_QUERY} from '~/sanity/queries'
+import {PAINTINGS_QUERY} from '~/sanity/queries'
 import type {Painting} from '~/types/painting'
 
 export const meta: MetaFunction<
@@ -29,11 +30,9 @@ export const meta: MetaFunction<
 
 export const loader = async ({request}: LoaderFunctionArgs) => {
   const {options} = await loadQueryOptions(request.headers)
-  const query = PAINTING_QUERY
-  const params = {
-    slug: 'dvojcici',
-  }
-  const initial = await loadQuery<Painting>(query, params, options).then(
+  const query = PAINTINGS_QUERY
+  const params = {}
+  const initial = await loadQuery<Painting[]>(query, params, options).then(
     (res) => ({
       ...res,
       data: res.data ? res.data : null,
@@ -54,8 +53,6 @@ export default function Index() {
     // @ts-expect-error
     initial,
   })
-
-  console.log(data)
 
   return (
     <div>
@@ -92,16 +89,16 @@ export default function Index() {
             refleksije na globalizacijsko soodvisnost ...
           </p>
           <div>
-            <Button size="lg" variant="outline">
-              Preberi več
-            </Button>
+            <Link to="/about">
+              <Button size="lg" variant="outline">
+                Preberi več
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-12 py-16 lg:p-20 lg:py-24">
-        <div className="grid gap-4">
-          <div>{data && <ImagePreview data={data} />}</div>
-        </div>
+      <div className="px-24">
+        <Mansory paintings={data as Painting[]} />
       </div>
     </div>
   )

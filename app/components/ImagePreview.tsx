@@ -11,7 +11,7 @@ export const ImagePreview = ({data}: any) => {
       <div className="group relative cursor-pointer">
         <img
           alt="Preview"
-          className="not-prose h-auto w-full rounded"
+          className="not-prose h-auto w-full rounded-lg"
           src={builder
             .image(data.image)
             .width(500)
