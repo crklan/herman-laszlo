@@ -12,12 +12,12 @@ export const Navigation = () => {
         Home
       </NavLink>
       <NavLink
-        to="works"
+        to="work"
         className={({isActive}) =>
           `transition-colors ${isActive ? 'underline' : 'hover:underline'}`
         }
       >
-        Works
+        Work
       </NavLink>
       <NavLink
         to="about"
