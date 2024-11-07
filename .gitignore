@@ -88,3 +88,7 @@ typings/
 .dynamodb/
 
 .env.local
+
+.idea/
+
+.DS_Store

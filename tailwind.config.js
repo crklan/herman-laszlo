@@ -55,7 +55,7 @@ module.exports = {
       },
       fontFamily: {
         body: ['Poppins'],
-        display: ['citrus-gothic-solid'],
+        display: ['citrus-gothic-rough'],
       },
     },
   },

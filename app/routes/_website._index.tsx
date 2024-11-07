@@ -4,7 +4,6 @@ import {useQuery} from '@sanity/react-loader'
 
 import background from '~/assets/background.png'
 import portrait from '~/assets/portrait.png'
-import {ImagePreview} from '~/components/ImagePreview'
 import {Mansory} from '~/components/Mansory'
 import {Button} from '~/components/ui/button'
 import type {loader as layoutLoader} from '~/routes/_website'
@@ -62,8 +61,8 @@ export default function Index() {
           alt="Landing page"
           src={background}
         />
-        <h1 className="text-8xl lg:text-[220px] font-display text-white absolute w-full text-center top-[30%]">
-          Laszlo Herman
+        <h1 className="text-8xl lg:text-[220px] font-display text-white absolute w-full text-center top-[40%]">
+          László Herman
         </h1>
       </div>
       <div className="w-full min-h-screen bg-sky-600 grid grid-cols-12 p-12 py-16 lg:p-20 lg:py-24">
@@ -97,7 +96,7 @@ export default function Index() {
           </div>
         </div>
       </div>
-      <div className="px-24">
+      <div className="px-24 pb-16">
         <Mansory paintings={data as Painting[]} />
       </div>
     </div>
