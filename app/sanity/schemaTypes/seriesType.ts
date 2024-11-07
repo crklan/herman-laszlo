@@ -14,5 +14,9 @@ export const seriesType = defineType({
       type: 'slug',
       options: {source: 'name'},
     }),
+    defineField({
+      name: 'description',
+      type: 'text',
+    }),
   ],
 })

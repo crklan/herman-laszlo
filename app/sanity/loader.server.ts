@@ -1,7 +1,7 @@
 import * as queryStore from '@sanity/react-loader'
 
 import {client} from '~/sanity/client'
-// import {STUDIO_BASEPATH} from '~/sanity/constants'
+import {STUDIO_BASEPATH} from '~/sanity/constants'
 
 // In a perfect world, these could be dynamic based on the Request
 // But because middleware hasn't landed in Remix
@@ -15,10 +15,10 @@ const clientWithToken = client.withConfig({
   // So they're disabled by default, which means no server-side Stega
   // But the <LiveMode /> component will do the job for us client-side
   // You do not want this enabled in production
-  // stega: {
-  //   enabled: true,
-  //   studioUrl: STUDIO_BASEPATH,
-  // },
+  stega: {
+    enabled: true,
+    studioUrl: STUDIO_BASEPATH,
+  },
 })
 
 queryStore.setServerClient(clientWithToken)
