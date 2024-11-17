@@ -8,7 +8,7 @@ export const Mansory = ({paintings}: {paintings: Painting[]}) => {
   const thirdColumn = paintings.filter((_, i) => i % 3 === 2)
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-20">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-20">
       <div className="grid gap-4">
         {firstColumn.map((painting: Painting) => (
           <ImagePreview key={painting._id} data={painting} />
