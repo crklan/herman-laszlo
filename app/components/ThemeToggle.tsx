@@ -8,12 +8,12 @@ export function ThemeToggle(props: {theme: ThemePreference}) {
   const isDarkMode = props.theme === `dark`
 
   return (
-    <cookieToggle.Form method="post" action="/resource/toggle-theme">
+    <cookieToggle.Form className="h-4" method="post" action="/resource/toggle-theme">
       <button type="submit" disabled={cookieToggle.state === 'submitting'}>
         {isDarkMode ? (
-          <Sun className="h-auto w-4" />
+          <Sun className="h-4 w-4 " />
         ) : (
-          <Moon className="h-auto w-4" />
+          <Moon className="h-4 w-4" />
         )}
         <div className="sr-only select-none">
           {isDarkMode ? `Light` : `Dark`} Mode
