@@ -1,18 +1,11 @@
 import type {LoaderFunctionArgs} from '@remix-run/node'
-import {
-  json,
-  Outlet,
-  useLoaderData,
-  useLocation,
-  useOutletContext,
-} from '@remix-run/react'
+import {json, Outlet, useLoaderData, useOutletContext} from '@remix-run/react'
 import {useQuery} from '@sanity/react-loader'
 import {VisualEditing} from '@sanity/visual-editing/remix'
 import {lazy, Suspense} from 'react'
 
 import {Footer} from '~/components/Footer'
 import {Header} from '~/components/Header'
-import {Title} from '~/components/Title'
 import {loadQuery} from '~/sanity/loader.server'
 import {loadQueryOptions} from '~/sanity/loadQueryOptions.server'
 import {HOME_QUERY} from '~/sanity/queries'
@@ -59,7 +52,6 @@ export default function Website() {
     // @ts-expect-error
     initial,
   })
-  const {pathname} = useLocation()
   const {theme} = useOutletContext<{theme: ThemePreference}>()
 
   return (
@@ -69,7 +61,7 @@ export default function Website() {
       <div className="mx-auto grid grid-cols-1 gap-4 lg:gap-12">
         <Outlet />
       </div>
-      <Footer home={home} />
+      <Footer />
       {sanity.preview ? (
         <Suspense>
           <SanityLiveMode />
