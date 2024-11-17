@@ -36,23 +36,37 @@ export const loader = async ({request}: LoaderFunctionArgs) => {
       data: res.data ? homeZ.parse(res.data) : undefined,
     }),
   )
+  const maintenanceMode = process.env.MAINTENANCE_MODE === 'true'
 
   return json({
     initial,
     query,
     params,
     sanity: {preview},
+    maintenanceMode,
   })
 }
 
 export default function Website() {
-  const {initial, query, params, sanity} = useLoaderData<typeof loader>()
+  const {initial, query, params, sanity, maintenanceMode} =
+    useLoaderData<typeof loader>()
   const {data: home} = useQuery<typeof initial.data>(query, params, {
     // There's a TS issue with how initial comes over the wire
     // @ts-expect-error
     initial,
   })
   const {theme} = useOutletContext<{theme: ThemePreference}>()
+
+  if (maintenanceMode) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold">László Herman</h1>
+          <p className="text-lg mt-4">Website is currently in development 🚧</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <>

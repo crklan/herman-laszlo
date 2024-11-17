@@ -36,7 +36,6 @@ export const loader = async ({request}: LoaderFunctionArgs) => {
   const theme = themePreference.parse(cookieValue.themePreference) || 'light'
   const bodyClassNames = getBodyClassNames(theme)
   const {toast, headers} = await getToast(request)
-  const maintenanceMode = process.env.MAINTENANCE_MODE === 'true'
 
   return json(
     {
@@ -48,7 +47,6 @@ export const loader = async ({request}: LoaderFunctionArgs) => {
         VITE_SANITY_API_VERSION: import.meta.env.VITE_SANITY_API_VERSION!,
       },
       toast,
-      maintenanceMode,
     },
     {
       headers,
@@ -57,8 +55,7 @@ export const loader = async ({request}: LoaderFunctionArgs) => {
 }
 
 export default function App() {
-  const {theme, bodyClassNames, ENV, maintenanceMode} =
-    useLoaderData<typeof loader>()
+  const {theme, bodyClassNames, ENV} = useLoaderData<typeof loader>()
   const {toast} = useLoaderData<typeof loader>()
   // Hook to show the toasts
   useEffect(() => {
@@ -69,30 +66,6 @@ export default function App() {
       notify.success(toast.message)
     }
   }, [toast])
-
-  if (maintenanceMode) {
-    return (
-      <html lang="en">
-        <head>
-          <Meta />
-          <meta charSet="utf-8" />
-          <meta name="viewport" content="width=device-width,initial-scale=1" />
-          <link rel="icon" href="https://fav.farm/🤘" />
-          <Links />
-        </head>
-        <body className={bodyClassNames}>
-          <div className="flex items-center justify-center h-screen">
-            <div className="text-center">
-              <h1 className="text-4xl font-bold">László Herman</h1>
-              <p className="text-lg mt-4">
-                Website is currently in development 🚧
-              </p>
-            </div>
-          </div>
-        </body>
-      </html>
-    )
-  }
 
   return (
     <html lang="en">
