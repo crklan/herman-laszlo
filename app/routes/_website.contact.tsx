@@ -2,19 +2,16 @@ import type {
   ActionFunction,
   ActionFunctionArgs,
   LoaderFunctionArgs,
-  MetaFunction,
 } from '@remix-run/node'
-import {Form, json, useActionData} from '@remix-run/react'
-import {toast} from 'sonner'
+import {Form, json} from '@remix-run/react'
+import {Resend} from 'resend'
 
 import portrait from '~/assets/portrait.png'
 import {Button} from '~/components/ui/button'
-import type {loader as layoutLoader} from '~/routes/_website'
+import {Label} from '~/components/ui/label'
 
 import {Input} from '../components/ui/input'
 import {Textarea} from '../components/ui/textarea'
-import {jsonWithSuccess} from 'remix-toast'
-import {Label} from '~/components/ui/label'
 
 /* export const meta: MetaFunction<
   typeof loader,
@@ -31,34 +28,51 @@ import {Label} from '~/components/ui/label'
   return [{title}]
 } */
 
+const resend = new Resend(process.env.RESEND_API_KEY)
+
 export const loader = async ({request}: LoaderFunctionArgs) => {
   return null
 }
 
 export const action: ActionFunction = async ({request}: ActionFunctionArgs) => {
-  const body = await request.formData()
-  //TODO - Add mail sending
+  const formData = await request.formData()
+  const name = formData.get('firstname') as string
+  const email = formData.get('email') as string
+  const message = formData.get('content') as string
 
-  return jsonWithSuccess(
-    {result: 'message sent'},
-    {message: 'Your message has been sent'},
-  )
+  console.log(name, email, message)
+
+  const {data, error} = await resend.emails.send({
+    from: `Webpage <no-reply@laszloherman.com>`,
+    replyTo: email,
+    to: ['info@laszloherman.com'],
+    subject: `New message from ${name}`,
+    text: message,
+  })
+
+  console.log(error)
+  if (error) {
+    return json({error}, 400)
+  }
+
+  console.log(data)
+  return json(data, 200)
 }
 
 export default function Index() {
   return (
-    <div>
-      <div className="bg-white w-full min-h-screen grid grid-cols-12 p-12 py-16 lg:p-20 lg:py-20">
-        <div className="relative order-2 lg:order-1 col-span-12 lg:col-span-6 flex justify-center items-center">
+    <>
+      <div className="bg-white w-full grid grid-cols-12 px-12 py-16 xl:px-44 xl:py-20 gap-y-16 lg:gap-y-0">
+        <div className="order-2 lg:order-1 col-span-12 lg:col-span-6 flex justify-center items-center">
           <img
-            className="object-cover h-[90%] w-3/4 z-10 shadow-[-20px_20px_0_5px_rgba(61,140,204,1)] lg:shadow-[-30px_30px_0_5px_rgba(61,140,204,1)]"
+            className="object-cover w-[50%] min-w-96 z-10 shadow-[-20px_20px_0_5px_rgba(61,140,204,1)] lg:shadow-[-30px_30px_0_5px_rgba(61,140,204,1)]"
             src={portrait}
             alt="Portrait of Laszlo"
           />
         </div>
 
         <div className="order-1 lg:order-2 col-span-12 lg:col-start-7 lg:col-span-6 flex flex-col gap-12">
-          <div className="font-display text-5xl lg:text-7xl mt-20">Contact</div>
+          <div className="font-display text-5xl lg:text-7xl mt-20">Kontakt</div>
           <p>Pošljite povpraševanje ali stopite v kontakt.</p>
           <Form method="post" className="grid grid-cols-12 gap-5">
             <div className="col-span-12 lg:col-span-6">
@@ -80,10 +94,15 @@ export default function Index() {
               <Input type="email" name="email" placeholder="Email" />
             </div>
             <div className="col-span-12 ">
-              <Label className="mb-4 block" htmlFor="message">
+              <Label className="mb-4 block" htmlFor="content">
                 Sporočilo
               </Label>
-              <Textarea rows={10} placeholder="Your message" />
+              <Textarea
+                id="content"
+                name="content"
+                rows={10}
+                placeholder="Your message"
+              />
             </div>
             <Button size="lg" type="submit">
               Pošlji
@@ -91,6 +110,6 @@ export default function Index() {
           </Form>
         </div>
       </div>
-    </div>
+    </>
   )
 }

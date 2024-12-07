@@ -7,28 +7,13 @@ import {Mansory} from '~/components/Mansory'
 import {Button} from '~/components/ui/button'
 import {loadQuery} from '~/sanity/loader.server'
 import {loadQueryOptions} from '~/sanity/loadQueryOptions.server'
-import {SERIE_QUERY} from '~/sanity/queries'
+import {TEHNIQUE_QUERY} from '~/sanity/queries'
 import type {Serie} from '~/types/series'
-
-/* export const meta: MetaFunction<
-  typeof loader,
-  {
-    'routes/_website': typeof layoutLoader
-  }
-> = ({matches}) => {
-  const layoutData = matches.find(
-    (match) => match.id === `routes/_website`,
-  )?.data
-  const home = layoutData ? layoutData.initial.data : null
-  const title = [home?.title, home?.siteTitle].filter(Boolean).join(' | ')
-
-  return [{title}]
-} */
 
 export const loader = async ({params, request}: LoaderFunctionArgs) => {
   console.log(params.id)
   const {options} = await loadQueryOptions(request.headers)
-  const query = SERIE_QUERY
+  const query = TEHNIQUE_QUERY
   const initial = await loadQuery<Serie>(query, {id: params.id}, options).then(
     (res) => ({
       ...res,
@@ -55,11 +40,10 @@ export default function Index() {
     initial,
   })
 
-  console.log(data)
   return (
-    <div className="flex flex-col text-center px-8 xl:px-44 xl:py-20">
+    <div className="flex flex-col text-center px-40 py-20">
       <div className="flex">
-        <Button variant="link">
+        <Button className="float-left" variant="link">
           <ArrowLeft strokeWidth={1} />
           <Link to="/work">Back</Link>
         </Button>

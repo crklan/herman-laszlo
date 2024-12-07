@@ -81,24 +81,28 @@ export default function Index() {
     },
   )
 
-  console.log(seriesData, techniquesData)
   return (
     <div>
-      <div className="bg-white w-full grid grid-cols-12 px-12 py-16 lg:px-44 lg:py-20">
-        <Tabs defaultValue="series" className="w-[400px]">
-          <TabsList className="mb-20">
+      <div className="w-full px-12 py-16 xl:px-44 xl:py-20">
+        <h1 className="font-display text-5xl lg:text-7xl mb-12">Works</h1>
+        <Tabs defaultValue="series" className="w-full">
+          <TabsList className="mb-4">
             <TabsTrigger value="series">Series</TabsTrigger>
             <TabsTrigger value="techniques">Techniques</TabsTrigger>
           </TabsList>
           <TabsContent value="series">
-            {seriesData?.map((serie) => (
-              <SeriesPreview key={serie.slug} data={serie} />
-            ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-10 lg:gap-6">
+              {seriesData?.map((serie) => (
+                <SeriesPreview key={serie.slug} data={serie} />
+              ))}
+            </div>
           </TabsContent>
           <TabsContent value="techniques">
-            {techniquesData?.map((technique) => (
-              <TechniquePreview key={technique.slug} data={technique} />
-            ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
+              {techniquesData?.map((technique) => (
+                <TechniquePreview key={technique.slug} data={technique} />
+              ))}
+            </div>
           </TabsContent>
         </Tabs>
       </div>

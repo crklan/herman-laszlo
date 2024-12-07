@@ -5,8 +5,8 @@ export function getBodyClassNames(themePreference?: string): string {
       ? window.matchMedia('(prefers-color-scheme: dark)').matches
       : themePreference === `dark`
   return [
-    `transition-colors duration-1000 ease-in-out min-h-screen`,
-    isDarkMode ? `dark bg-black text-white` : `bg-white text-black`,
+    `transition-colors ease-in-out h-full flex flex-col bg-background`,
+    isDarkMode && `dark`,
   ]
     .join(' ')
     .trim()

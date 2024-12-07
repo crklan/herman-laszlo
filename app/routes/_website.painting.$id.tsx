@@ -60,20 +60,20 @@ export default function Index() {
   return (
     <div className="flex flex-col text-center px-40 py-6">
       <div className="flex mb-4">
-        <Button className="float-left" variant="link">
+        <Button variant="link">
           <ArrowLeft strokeWidth={1} />
           <Link to="..">Back</Link>
         </Button>
       </div>
       <div className="grid grid-cols-12 gap-16 w-full">
-        <div className="col-span-12 lg:col-span-6 mx-20">
-          <ImagePreview data={data as Painting} />
+        <div className="col-span-12 lg:col-span-6 flex justify-center">
+          <ImagePreview isPreview={true} data={data as Painting} />
         </div>
         <div className="col-span-12 lg:col-span-6 flex flex-col justify-center items-start gap-1">
           <h2 className="text-4xl">{data?.title}</h2>
           <span className="mb-4">{data?.series}</span>
           <span>{data?.technique}</span>
-          <span>{`${data?.length}x${data?.width} cm`}</span>
+          <span>{`${data?.width}x${data?.height} cm`}</span>
           <span>{data?.year}</span>
           <div className="border-b border-gray-400 w-96 my-4"></div>
           <a

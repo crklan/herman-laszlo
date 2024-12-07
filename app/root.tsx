@@ -23,9 +23,9 @@ import {themePreference} from '~/types/themePreference'
 
 export const links: LinksFunction = () => {
   return [
-    {rel: 'stylesheet', href: styles},
     {rel: 'preconnect', href: 'https://cdn.sanity.io'},
     {rel: 'stylesheet', href: 'https://use.typekit.net/zde6oty.css'},
+    {rel: 'stylesheet', href: styles},
   ]
 }
 
@@ -68,7 +68,7 @@ export default function App() {
   }, [toast])
 
   return (
-    <html lang="en">
+    <html lang="en" className="h-full">
       <head>
         <Meta />
         <meta charSet="utf-8" />

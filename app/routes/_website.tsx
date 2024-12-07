@@ -71,8 +71,7 @@ export default function Website() {
   return (
     <>
       <Header home={home} theme={theme} />
-
-      <div className="mx-auto grid grid-cols-1 gap-4 lg:gap-12">
+      <div className="flex-1 bg-red">
         <Outlet />
       </div>
       <Footer />
