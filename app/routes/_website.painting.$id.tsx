@@ -61,33 +61,37 @@ export default function Index() {
   const goBack = () => navigate(-1)
 
   return (
-    <div className="flex flex-col text-center px-8 xl:px-44 xl:py-20">
-      <div className="flex mb-4">
-        <Button variant="link">
-          <ArrowLeft strokeWidth={1} />
-          <Button variant="link" onClick={goBack}>
-            <Trans>Back</Trans>
-          </Button>
-        </Button>
-      </div>
-      <div className="grid grid-cols-12 lg:gap-16 w-full lg:min-h-[500px]">
-        <div className="col-span-12 lg:col-span-6 flex items-center justify-center">
-          <ImagePreview isPreview={true} data={data as Painting} />
+    <>
+      <Button
+        className="lg:ps-24 xl:ps-44 mt-12"
+        variant="link"
+        onClick={goBack}
+      >
+        <ArrowLeft strokeWidth={1} />
+        <Trans>Back</Trans>
+      </Button>
+      <div className="flex flex-col text-center px-12 py-4 lg:px-24 xl:px-44 lg:py-2">
+        <div className="grid grid-cols-12 lg:gap-16 w-full lg:min-h-[500px]">
+          <div className="col-span-12 lg:col-span-6 flex items-center justify-center">
+            <ImagePreview isPreview={true} data={data as Painting} />
+          </div>
+          <div className="col-span-12 lg:col-span-6 flex flex-col justify-center items-start gap-1 mt-12 lg:mt-0">
+            <h2 className="text-4xl">{data?.title}</h2>
+            <span className="mb-4">{data?.series}</span>
+            <span>{data?.technique}</span>
+            <span>{`${data?.width}x${data?.height} cm`}</span>
+            <span>{data?.year}</span>
+            <div className="border-b border-gray-400 w-full my-4"></div>
+            <a
+              href={`mailto:info@laszloherman.com?subject=Povpraševanje "${data?.title}"`}
+            >
+              <Button>
+                <Trans>Pošlji povpraševanje</Trans>
+              </Button>
+            </a>
+          </div>
         </div>
-        <div className="col-span-12 lg:col-span-6 flex flex-col justify-center items-start gap-1 mt-12 lg:mt-0">
-          <h2 className="text-4xl">{data?.title}</h2>
-          <span className="mb-4">{data?.series}</span>
-          <span>{data?.technique}</span>
-          <span>{`${data?.width}x${data?.height} cm`}</span>
-          <span>{data?.year}</span>
-          <div className="border-b border-gray-400 w-full my-4"></div>
-          <a
-            href={`mailto:info@laszloherman.com?subject=Povpraševanje "${data?.title}"`}
-          >
-            <Button>Pošlji povpraševanje</Button>
-          </a>
-        </div>
       </div>
-    </div>
+    </>
   )
 }

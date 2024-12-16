@@ -75,10 +75,10 @@ export default function Index() {
 
   return (
     <>
-      <div className="bg-background w-full grid grid-cols-12 px-12 py-16 xl:px-44 xl:py-20 gap-y-16 lg:gap-y-0">
-        <div className="order-2 lg:order-1 col-span-12 lg:col-span-6 flex justify-center items-center">
+      <div className="bg-background w-full grid grid-cols-12 px-12 py-4 lg:px-24 xl:px-44 lg:py-20 gap-y-16 lg:gap-y-0">
+        <div className="order-2 mb-12 lg:order-1 col-span-12 lg:col-span-6 flex justify-center items-center">
           <img
-            className="object-cover w-[50%] min-w-96 z-10 shadow-[-20px_20px_0_5px_rgba(61,140,204,1)] lg:shadow-[-40px_40px_0_10px_rgba(61,140,204,1)]"
+            className="object-cover w-5/6 md:w-[50%] lg:min-w-96 z-10 shadow-[-20px_20px_0_5px_rgba(61,140,204,1)] lg:shadow-[-40px_40px_0_10px_rgba(61,140,204,1)]"
             src={portrait}
             alt="Portrait of Laszlo"
           />

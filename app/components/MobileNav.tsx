@@ -1,5 +1,6 @@
 import {Trans} from '@lingui/react'
 import {NavLink} from '@remix-run/react'
+import {MenuIcon} from 'lucide-react'
 import * as React from 'react'
 
 import type {Navigation} from '~/config/nav.config'
@@ -25,7 +26,7 @@ export function MobileNav({className, items}: MobileNavProps) {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger className={className}>
         <div className="flex items-center justify-center">
-          <span className="font-bold">Meni</span>
+          <MenuIcon size={24} />
         </div>
       </SheetTrigger>
       <SheetContent

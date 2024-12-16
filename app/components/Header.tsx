@@ -4,6 +4,7 @@ import {navigation} from '~/config/nav.config'
 import type {HeaderProps} from '~/types/home'
 
 import {DesktopNav} from './DesktopNav'
+import {LocaleSelector} from './LanguageSelector'
 import {MobileNav} from './MobileNav'
 
 export function Header(props: HeaderProps) {
@@ -15,10 +16,14 @@ export function Header(props: HeaderProps) {
           <DesktopNav items={navigation} />
           <div className="flex">
             <ThemeToggle theme={props.theme} />
-            {/*  <LocaleSelector /> */}
+            <LocaleSelector />
           </div>
         </div>
-        <MobileNav className="md:hidden" items={navigation} />
+        <div className="flex md:hidden justify-end gap-4">
+          <ThemeToggle theme={props.theme} />
+          <LocaleSelector />
+          <MobileNav className="md:hidden" items={navigation} />
+        </div>
       </div>
     </header>
   )

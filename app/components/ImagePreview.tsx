@@ -30,6 +30,7 @@ export const ImagePreview = ({
 
   return (
     <Link
+      prefetch="intent"
       className="flex justify-center object-contain"
       to={`/painting/${data._id}`}
     >
