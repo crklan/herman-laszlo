@@ -27,7 +27,7 @@ export const paintingType = defineType({
       to: [{type: 'series'}],
     }),
     defineField({
-      name: 'length',
+      name: 'height',
       type: 'number',
     }),
     defineField({

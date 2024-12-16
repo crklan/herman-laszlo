@@ -19,7 +19,7 @@ export const meta: MetaFunction<
   }
 > = ({matches}) => {
   const layoutData = matches.find(
-    (match) => match.id === `routes/_website`
+    (match) => match.id === `routes/_website`,
   )?.data
   const home = layoutData ? layoutData.initial.data : null
   const title = [home?.title, home?.siteTitle].filter(Boolean).join(' | ')
@@ -34,8 +34,8 @@ export const loader = async ({request}: LoaderFunctionArgs) => {
   const initial = await loadQuery<Painting[]>(query, params, options).then(
     (res) => ({
       ...res,
-      data: res.data ? res.data : null
-    })
+      data: res.data ? res.data : null,
+    }),
   )
 
   if (!initial.data) {
@@ -50,7 +50,7 @@ export default function Index() {
   const {data} = useQuery<typeof initial.data>(query, params, {
     // There's a TS issue with how initial comes over the wire
     // @ts-expect-error
-    initial
+    initial,
   })
 
   return (
@@ -65,7 +65,7 @@ export default function Index() {
           László Herman
         </h1>
       </div>
-      <div className="w-full min-h-screen bg-sky-600 grid grid-cols-12 p-8 py-16 lg:p-20 lg:py-24">
+      <div className="w-full min-h-screen bg-sky-600 dark:bg-sky-900 grid grid-cols-12 p-8 py-16 lg:p-20 lg:py-24">
         <div className="relative order-2 lg:order-1 col-span-12 lg:col-span-5 flex justify-center items-center">
           <img
             className="object-cover h-[90%] w-3/4 z-10 shadow-[-20px_20px_0_5px_rgba(255,255,255,1)] lg:shadow-[-30px_30px_0_5px_rgba(255,255,255,1)]"
@@ -94,9 +94,10 @@ export default function Index() {
           </Link>
         </div>
       </div>
-      <div className="px-4 md:px-24 pb-16">
+      {/* <div className="px-4 md:px-24 pb-16">
+        <h3 className="mt-4 text-5xl font-display">Izbrana dela</h3>
         <Mansory paintings={data as Painting[]} />
-      </div>
+      </div> */}
     </div>
   )
 }

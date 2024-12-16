@@ -47,7 +47,7 @@ export const PAINTING_QUERY = groq`*[_type == "painting" && _id == $id][0]{
   "technique": techniques->name
 }`
 
-export const PAINTINGS_QUERY = groq`*[_type == "painting"]{
+export const PAINTINGS_QUERY = groq`*[_type == "painting"][0...9]{
   ...,
   id_,
   _createdAt,
@@ -56,7 +56,7 @@ export const PAINTINGS_QUERY = groq`*[_type == "painting"]{
   "series": series->name,
   "techniques": techniques->name
 }
-| order(_createdAt desc)`
+| order(_title asc)`
 
 export const SERIES_QUERY = groq`*[_type == "series"]{
   ...,
@@ -75,7 +75,7 @@ export const SERIE_QUERY = groq`*[_type == "series" && _id == $id][0]{
   _updatedAt,
   name,
   "slug": slug.current,
-  "paintings": *[ _type == "painting" && references(^._id) && featured == true ]{...}
+  "paintings": *[ _type == "painting" && references(^._id)  ]{...}
 }`
 
 export const TECHNIQUES_QUERY = groq`*[_type == "technique"]{
@@ -86,4 +86,14 @@ export const TECHNIQUES_QUERY = groq`*[_type == "technique"]{
   name,
   "slug": slug.current,
   "cover": *[ _type == "painting" && references(^._id) ][0]{image}
+}`
+
+export const TEHNIQUE_QUERY = groq`*[_type == "technique" && _id == $id][0]{
+  ...,
+  id_,
+  _createdAt,
+  _updatedAt,
+  name,
+  "slug": slug.current,
+  "paintings": *[ _type == "painting" && references(^._id)  ]{...}
 }`

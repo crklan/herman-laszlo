@@ -1,5 +1,6 @@
+import {Trans} from '@lingui/react/macro'
 import type {LoaderFunctionArgs} from '@remix-run/node'
-import {Link, useLoaderData} from '@remix-run/react'
+import {useLoaderData, useNavigate} from '@remix-run/react'
 import {useQuery} from '@sanity/react-loader'
 import {ArrowLeft} from 'lucide-react'
 
@@ -56,26 +57,30 @@ export default function Index() {
     // @ts-expect-error
     initial,
   })
+  const navigate = useNavigate()
+  const goBack = () => navigate(-1)
 
   return (
-    <div className="flex flex-col text-center px-40 py-6">
+    <div className="flex flex-col text-center px-8 xl:px-44 xl:py-20">
       <div className="flex mb-4">
-        <Button className="float-left" variant="link">
+        <Button variant="link">
           <ArrowLeft strokeWidth={1} />
-          <Link to="..">Back</Link>
+          <Button variant="link" onClick={goBack}>
+            <Trans>Back</Trans>
+          </Button>
         </Button>
       </div>
-      <div className="grid grid-cols-12 gap-16 w-full">
-        <div className="col-span-12 lg:col-span-6 mx-20">
-          <ImagePreview data={data as Painting} />
+      <div className="grid grid-cols-12 lg:gap-16 w-full lg:min-h-[500px]">
+        <div className="col-span-12 lg:col-span-6 flex items-center justify-center">
+          <ImagePreview isPreview={true} data={data as Painting} />
         </div>
-        <div className="col-span-12 lg:col-span-6 flex flex-col justify-center items-start gap-1">
+        <div className="col-span-12 lg:col-span-6 flex flex-col justify-center items-start gap-1 mt-12 lg:mt-0">
           <h2 className="text-4xl">{data?.title}</h2>
           <span className="mb-4">{data?.series}</span>
           <span>{data?.technique}</span>
-          <span>{`${data?.length}x${data?.width} cm`}</span>
+          <span>{`${data?.width}x${data?.height} cm`}</span>
           <span>{data?.year}</span>
-          <div className="border-b border-gray-400 w-96 my-4"></div>
+          <div className="border-b border-gray-400 w-full my-4"></div>
           <a
             href={`mailto:info@laszloherman.com?subject=Povpraševanje "${data?.title}"`}
           >

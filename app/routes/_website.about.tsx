@@ -1,3 +1,4 @@
+import {Trans} from '@lingui/react/macro'
 import type {LoaderFunctionArgs, MetaFunction} from '@remix-run/node'
 import {Link} from '@remix-run/react'
 
@@ -25,20 +26,20 @@ export const loader = async ({request}: LoaderFunctionArgs) => {
 
 export default function Index() {
   return (
-    <div>
-      <div className="bg-white w-full grid grid-cols-12 p-12 py-16 lg:p-20 lg:py-20">
-        <div className="relative order-2 lg:order-1 col-span-12 lg:col-span-6 flex justify-center items-center">
+    <>
+      <div className="bg-background w-full grid grid-cols-12 px-12 py-16 xl:px-44 xl:py-20 gap-y-16 lg:gap-y-0">
+        <div className="order-2 lg:order-1 col-span-12 lg:col-span-6 flex justify-center items-center">
           <img
-            className="object-cover h-[90%] w-3/4 z-10 shadow-[-20px_20px_0_5px_rgba(222,74,46,1)] lg:shadow-[-30px_30px_0_5px_rgba(222,74,46,1)]"
+            className="object-cover w-[50%] min-w-96 z-10 shadow-[-20px_20px_0_5px_rgba(222,74,46,1)] lg:shadow-[-40px_40px_0_10px_rgba(222,74,46,1)]"
             src={portrait}
             alt="Portrait of Laszlo"
           />
         </div>
-        <div className="order-1 lg:order-2 col-span-12 lg:col-start-7 lg:col-span-6 flex flex-col gap-12">
+        <div className="order-1 lg:order-2 col-span-12 lg:col-start-7 lg:col-span-6 flex flex-col gap-12 h-min">
           <div className="font-display text-5xl lg:text-7xl mt-20">
-            O umetniku
+            <Trans>About</Trans>
           </div>
-          <p className="text-lg lg:text-xl font-light leading-7 lg:leading-9">
+          <p className="text-lg lg:text-xl font-light leading-7 lg:leading-8">
             László Herman  se je rodil leta 1961 v Gornjem Lakošu, v Lendavi. 
             Odraščal je v delovski-kmečki družini. Dvojezično šolo je obiskoval
             v Gaberju v Lendavi, nato pa šolanje nadaljeval na ljubljanski
@@ -60,18 +61,7 @@ export default function Index() {
             Made in China ter Dolgo, vroče poletje v Lakošu.
           </p>
         </div>
-        <div className="order-3 col-span-12 mt-16">
-          <h3 className="font-display text-5xl mb-4">Publications</h3>
-          <div>2024</div>
-          <ul>
-            <li>
-              <Link to="https://www.researchgate.net/profile/Laszlo_Herman">
-                https://www.researchgate.net/profile/Laszlo_Herman
-              </Link>
-            </li>
-          </ul>
-        </div>
       </div>
-    </div>
+    </>
   )
 }

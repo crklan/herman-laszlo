@@ -6,10 +6,12 @@ import type {Technique} from '~/types/technique'
 
 export const TechniquePreview = ({data}: {data: Technique}) => {
   const builder = imageUrlBuilder({projectId, dataset})
-  if (!data) return <div></div>
-  console.log(data)
+  if (!data) return
   return (
-    <Link to={`/serie/${data._id}`}>
+    <Link
+      className="flex w-full items-center justify-start flex-col"
+      to={`/technique/${data._id}`}
+    >
       <div className="group relative cursor-pointer">
         {data?.cover?.image ? (
           <img
@@ -17,9 +19,9 @@ export const TechniquePreview = ({data}: {data: Technique}) => {
             className="not-prose h-auto w-full rounded-lg"
             src={builder
               .image(data.cover.image)
-              .width(500)
-              .height(500)
-              .quality(80)
+              .width(400)
+              .height(400)
+              .quality(40)
               .url()}
           />
         ) : (

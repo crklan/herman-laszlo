@@ -5,7 +5,7 @@ export const paintingZ = z.object({
   slug: z.string().nullable(),
   technique: z.string().nullable(),
   series: z.string().nullable(),
-  length: z.number().nullable(),
+  height: z.number().nullable(),
   width: z.number().nullable(),
   year: z.number().nullable(),
   description: z.string().nullable(),

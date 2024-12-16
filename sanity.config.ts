@@ -10,8 +10,8 @@ import {defaultDocumentNode, structure} from '~/sanity/structure'
 
 export default defineConfig({
   ...projectDetails(),
-  name: 'sanity-remix',
-  title: 'Sanity Remix',
+  name: 'laszlo-herman',
+  title: 'Laszlo Herman',
   plugins: [
     structureTool({structure, defaultDocumentNode}),
     presentationTool({

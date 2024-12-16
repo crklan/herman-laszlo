@@ -1,16 +1,16 @@
+import {Trans} from '@lingui/react/macro'
 import type {LoaderFunctionArgs} from '@remix-run/node'
 import {useLoaderData} from '@remix-run/react'
 import {useQuery} from '@sanity/react-loader'
-import {ImagePreview} from '~/components/ImagePreview'
+
 import {SeriesPreview} from '~/components/SeriesPreview'
 import {TechniquePreview} from '~/components/TechniquePreview'
-
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '~/components/ui/tabs'
 import {loadQuery} from '~/sanity/loader.server'
 import {loadQueryOptions} from '~/sanity/loadQueryOptions.server'
 import {SERIES_QUERY, TECHNIQUES_QUERY} from '~/sanity/queries'
-import {Serie} from '~/types/series'
-import {Technique} from '~/types/technique'
+import type {Serie} from '~/types/series'
+import type {Technique} from '~/types/technique'
 
 /* export const meta: MetaFunction<
   typeof loader,
@@ -81,24 +81,34 @@ export default function Index() {
     },
   )
 
-  console.log(seriesData, techniquesData)
   return (
     <div>
-      <div className="bg-white w-full grid grid-cols-12 px-12 py-16 lg:px-44 lg:py-20">
-        <Tabs defaultValue="series" className="w-[400px]">
-          <TabsList className="mb-20">
-            <TabsTrigger value="series">Series</TabsTrigger>
-            <TabsTrigger value="techniques">Techniques</TabsTrigger>
+      <div className="w-full px-12 py-16 xl:px-44 xl:py-20">
+        <h1 className="font-display text-5xl lg:text-7xl mb-12">
+          <Trans>Works</Trans>
+        </h1>
+        <Tabs defaultValue="series" className="w-full">
+          <TabsList className="mb-4">
+            <TabsTrigger value="series">
+              <Trans>Series</Trans>
+            </TabsTrigger>
+            <TabsTrigger value="techniques">
+              <Trans>Techniques</Trans>
+            </TabsTrigger>
           </TabsList>
           <TabsContent value="series">
-            {seriesData?.map((serie) => (
-              <SeriesPreview key={serie.slug} data={serie} />
-            ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-10 lg:gap-6">
+              {seriesData?.map((serie) => (
+                <SeriesPreview key={serie.slug} data={serie} />
+              ))}
+            </div>
           </TabsContent>
           <TabsContent value="techniques">
-            {techniquesData?.map((technique) => (
-              <TechniquePreview key={technique.slug} data={technique} />
-            ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
+              {techniquesData?.map((technique) => (
+                <TechniquePreview key={technique.slug} data={technique} />
+              ))}
+            </div>
           </TabsContent>
         </Tabs>
       </div>
