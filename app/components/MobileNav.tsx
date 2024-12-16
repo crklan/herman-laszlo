@@ -4,7 +4,6 @@ import * as React from 'react'
 
 import type {Navigation} from '~/config/nav.config'
 
-import {Logo} from './Logo'
 import {
   Sheet,
   SheetContent,
