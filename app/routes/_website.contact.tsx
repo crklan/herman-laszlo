@@ -10,7 +10,7 @@ import {useEffect} from 'react'
 import {Resend} from 'resend'
 import {toast} from 'sonner'
 
-import portrait from '~/assets/portrait.png'
+import portrait from '~/assets/portrait.jpeg'
 import {Button} from '~/components/ui/button'
 import {Label} from '~/components/ui/label'
 

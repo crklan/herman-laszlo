@@ -4,7 +4,7 @@ import {Link, useLoaderData} from '@remix-run/react'
 import {useQuery} from '@sanity/react-loader'
 
 import background from '~/assets/background.png'
-import portrait from '~/assets/portrait.png'
+import portrait from '~/assets/new-portrait.jpeg'
 import {Mansory} from '~/components/Mansory'
 import {Button} from '~/components/ui/button'
 import type {loader as layoutLoader} from '~/routes/_website'
@@ -69,14 +69,14 @@ export default function Index() {
       <div className="w-full min-h-screen bg-sky-600 dark:bg-sky-900 grid grid-cols-12 p-8 py-16 lg:p-20 lg:py-24 -mt-2 lg:mt-0">
         <div className="relative mt-12 lg:mt-0 order-2 lg:order-1 col-span-12 lg:col-span-5 flex justify-center items-center">
           <img
-            className="object-cover h-[90%] lg:w-3/4 w-5/6 z-10 shadow-[-20px_20px_0_5px_rgba(255,255,255,1)] lg:shadow-[-30px_30px_0_5px_rgba(255,255,255,1)]"
+            className="object-cover h-full lg:h-[70%] lg:w-3/4 w-5/6 z-10 shadow-[-20px_20px_0_5px_rgba(255,255,255,1)] lg:shadow-[-30px_30px_0_5px_rgba(255,255,255,1)]"
             src={portrait}
             alt="Portrait of Laszlo"
           />
         </div>
         <div className="order-1 lg:order-2 col-span-12 lg:col-start-7 lg:col-span-6 flex flex-col gap-4 lg:gap-12">
           <div className="font-display text-5xl lg:text-7xl text-white mt-20">
-            O slikarju
+            <Trans>About</Trans>
           </div>
           <p className="text-lg lg:text-2xl font-light leading-7 lg:leading-10 text-white">
             <Trans>

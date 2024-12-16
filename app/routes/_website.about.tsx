@@ -1,7 +1,7 @@
 import {Trans} from '@lingui/react/macro'
 import type {LoaderFunctionArgs} from '@remix-run/node'
 
-import portrait from '~/assets/portrait.png'
+import portrait from '~/assets/old-portrait.jpeg'
 
 /* export const meta: MetaFunction<
   typeof loader,
