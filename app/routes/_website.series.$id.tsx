@@ -1,5 +1,6 @@
+import {Trans} from '@lingui/react/macro'
 import type {LoaderFunctionArgs} from '@remix-run/node'
-import {Link, useLoaderData} from '@remix-run/react'
+import {Link, useLoaderData, useNavigate} from '@remix-run/react'
 import {useQuery} from '@sanity/react-loader'
 import {ArrowLeft} from 'lucide-react'
 
@@ -54,6 +55,8 @@ export default function Index() {
     // @ts-expect-error
     initial,
   })
+  const navigate = useNavigate()
+  const goBack = () => navigate(-1)
 
   console.log(data)
   return (
@@ -61,7 +64,9 @@ export default function Index() {
       <div className="flex">
         <Button variant="link">
           <ArrowLeft strokeWidth={1} />
-          <Link to="/work">Back</Link>
+          <Button variant="link" onClick={goBack}>
+            <Trans>Back</Trans>
+          </Button>
         </Button>
       </div>
       <h1 className="font-display text-5xl mb-12">{data?.name}</h1>

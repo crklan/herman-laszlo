@@ -1,3 +1,4 @@
+import {Trans} from '@lingui/react/macro'
 import type {LoaderFunctionArgs, MetaFunction} from '@remix-run/node'
 import {Link} from '@remix-run/react'
 
@@ -36,7 +37,7 @@ export default function Index() {
         </div>
         <div className="order-1 lg:order-2 col-span-12 lg:col-start-7 lg:col-span-6 flex flex-col gap-12 h-min">
           <div className="font-display text-5xl lg:text-7xl mt-20">
-            O umetniku
+            <Trans>About</Trans>
           </div>
           <p className="text-lg lg:text-xl font-light leading-7 lg:leading-8">
             László Herman  se je rodil leta 1961 v Gornjem Lakošu, v Lendavi. 

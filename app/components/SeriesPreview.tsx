@@ -22,7 +22,7 @@ export const SeriesPreview = ({data}: {data: Serie}) => {
             .image(data?.cover?.image)
             .width(400)
             .height(400)
-            .quality(80)
+            .quality(40)
             .url()}
         />
       ) : (

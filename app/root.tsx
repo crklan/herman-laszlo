@@ -1,7 +1,12 @@
 import '@fontsource/poppins/300.css'
 import '@fontsource/poppins/700.css'
 
-import type {LinksFunction, LoaderFunctionArgs} from '@remix-run/node'
+import {i18n} from '@lingui/core'
+import type {
+  ActionFunctionArgs,
+  LinksFunction,
+  LoaderFunctionArgs,
+} from '@remix-run/node'
 import {json} from '@remix-run/node'
 import {
   Links,
@@ -21,12 +26,31 @@ import {getBodyClassNames} from '~/lib/getBodyClassNames'
 import styles from '~/tailwind.css?url'
 import {themePreference} from '~/types/themePreference'
 
+import {loadCatalog} from './modules/lingui/lingui'
+import {linguiServer, localeCookie} from './modules/lingui/lingui.server'
+
 export const links: LinksFunction = () => {
   return [
     {rel: 'preconnect', href: 'https://cdn.sanity.io'},
     {rel: 'stylesheet', href: 'https://use.typekit.net/zde6oty.css'},
     {rel: 'stylesheet', href: styles},
+    {
+      rel: 'icon',
+      href: '/favicon.ico',
+    },
   ]
+}
+
+export async function action({request}: ActionFunctionArgs) {
+  const formData = await request.formData()
+
+  const locale = formData.get('locale') ?? 'en'
+
+  return Response.json(null, {
+    headers: {
+      'Set-Cookie': await localeCookie.serialize(locale),
+    },
+  })
 }
 
 export const loader = async ({request}: LoaderFunctionArgs) => {
@@ -35,7 +59,10 @@ export const loader = async ({request}: LoaderFunctionArgs) => {
   const cookieValue = (await themePreferenceCookie.parse(cookieHeader)) || {}
   const theme = themePreference.parse(cookieValue.themePreference) || 'light'
   const bodyClassNames = getBodyClassNames(theme)
+  const locale = await linguiServer.getLocale(request)
+
   const {toast, headers} = await getToast(request)
+  headers.append('Set-Cookie', await localeCookie.serialize(locale))
 
   return json(
     {
@@ -47,6 +74,7 @@ export const loader = async ({request}: LoaderFunctionArgs) => {
         VITE_SANITY_API_VERSION: import.meta.env.VITE_SANITY_API_VERSION!,
       },
       toast,
+      locale,
     },
     {
       headers,
@@ -54,9 +82,11 @@ export const loader = async ({request}: LoaderFunctionArgs) => {
   )
 }
 
+export type RootLoaderType = typeof loader
+
 export default function App() {
   const {theme, bodyClassNames, ENV} = useLoaderData<typeof loader>()
-  const {toast} = useLoaderData<typeof loader>()
+  const {toast, locale} = useLoaderData<typeof loader>()
   // Hook to show the toasts
   useEffect(() => {
     if (toast?.type === 'error') {
@@ -67,13 +97,19 @@ export default function App() {
     }
   }, [toast])
 
+  useEffect(() => {
+    if (i18n.locale !== locale) {
+      loadCatalog(locale)
+    }
+  }, [locale])
+
   return (
-    <html lang="en" className="h-full">
+    <html lang={locale ?? 'en'} className="h-full">
       <head>
         <Meta />
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <link rel="icon" href="https://fav.farm/🤘" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <Links />
       </head>
       <body className={bodyClassNames}>

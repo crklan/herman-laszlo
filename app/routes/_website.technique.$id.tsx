@@ -1,3 +1,4 @@
+import {Trans} from '@lingui/react/macro'
 import type {LoaderFunctionArgs} from '@remix-run/node'
 import {Link, useLoaderData} from '@remix-run/react'
 import {useQuery} from '@sanity/react-loader'
@@ -41,14 +42,18 @@ export default function Index() {
   })
 
   return (
-    <div className="flex flex-col text-center px-40 py-20">
+    <div className="flex flex-col text-center px-8 xl:px-44 xl:py-20">
       <div className="flex">
         <Button className="float-left" variant="link">
           <ArrowLeft strokeWidth={1} />
-          <Link to="/work">Back</Link>
+          <Link to="/work">
+            <Trans>Back</Trans>
+          </Link>
         </Button>
       </div>
-      <h1 className="font-display text-5xl mb-12">{data?.name}</h1>
+      <h1 className="font-display text-5xl mb-12">
+        <Trans>{data?.name}</Trans>
+      </h1>
       <p className="font-body text-left">{data?.description}</p>
       <Mansory paintings={data?.paintings} />
     </div>

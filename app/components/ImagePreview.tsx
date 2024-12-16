@@ -2,7 +2,7 @@ import {Link} from '@remix-run/react'
 import imageUrlBuilder from '@sanity/image-url'
 
 import {dataset, projectId} from '~/sanity/projectDetails'
-import {Painting} from '~/types/painting'
+import type {Painting} from '~/types/painting'
 
 export const ImagePreview = ({
   data,
@@ -17,12 +17,11 @@ export const ImagePreview = ({
     return (
       <img
         alt="Preview"
-        className="not-prose max-h-[800px] rounded-lg"
+        className="object-contain max-h-[800px]  rounded-lg"
         src={builder
           .image(data.image)
-          .maxHeight(300)
-          .width(800)
-          .quality(80)
+          .quality(100)
+          .auto('format')
           .fit('fillmax')
           .url()}
       />
@@ -30,17 +29,14 @@ export const ImagePreview = ({
   }
 
   return (
-    <Link className="flex justify-center" to={`/painting/${data._id}`}>
+    <Link
+      className="flex justify-center object-contain"
+      to={`/painting/${data._id}`}
+    >
       <img
         alt="Preview"
         className="not-prose max-h-[500px] rounded-lg"
-        src={builder
-          .image(data.image)
-          .maxHeight(300)
-          .width(500)
-          .quality(80)
-          .fit('fillmax')
-          .url()}
+        src={builder.image(data.image).quality(40).fit('max').url()}
       />
     </Link>
   )
