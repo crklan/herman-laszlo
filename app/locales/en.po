@@ -13,13 +13,24 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: app/routes/_website.about.tsx:40
-#: app/components/Navigation.tsx:29
+#. placeholder {0}: data?.name
+#: app/routes/_website.technique.$id.tsx:55
+msgid "{0}"
+msgstr ""
+
+#: app/routes/_website.about.tsx:38
+#: app/config/nav.config.ts:12
 msgid "About"
 msgstr "About"
 
+#: app/routes/_website.technique.$id.tsx:50
+#: app/routes/_website.series.$id.tsx:68
+#: app/routes/_website.painting.$id.tsx:69
+msgid "Back"
+msgstr "Back"
+
 #: app/routes/_website.contact.tsx:89
-#: app/components/Navigation.tsx:37
+#: app/config/nav.config.ts:13
 msgid "Contact"
 msgstr "Contact"
 
@@ -41,7 +52,7 @@ msgstr "English"
 msgid "First name"
 msgstr "First name"
 
-#: app/components/Navigation.tsx:13
+#: app/config/nav.config.ts:10
 msgid "Home"
 msgstr "Home"
 
@@ -49,6 +60,14 @@ msgstr "Home"
 #: app/routes/_website.contact.tsx:109
 msgid "Last name"
 msgstr "Last name"
+
+#: app/routes/_website.about.tsx:41
+msgid "László Herman  se je rodil leta 1961 v Gornjem Lakošu, v Lendavi.  Odraščal je v delovski-kmečki družini. Dvojezično šolo je obiskoval v Gaberju v Lendavi, nato pa šolanje nadaljeval na ljubljanski srednji šoli za oblikovanje. V slovenski prestolnici je zaključil tudi višješolsko in visokošolsko izobraževanje, in sicer najprej na Pedagoški akademiji - smer likovna in tehnična vzgoja, kasneje pa še na Pedagoški fakulteti Univerze v Ljubljani - smer likovna umetnost. Odkar je zaključil šolanje, dela kot učitelj. Na začetku svoje umetniške poti je imela velik vpliv nanj fotografska umetnost, kasneje pa se je njegovo zanimanje preusmerilo k slikarstvu. Njegovi slikarski podvigi in študije obsegajo širok tematski in motivni spekter: zgodovino, znanstveno-tehnično revolucijo, manjšinsko bit, poglavja iz zgodovine lastne družine, brezizhodnost malega človeka, ki je žrtev političnih manipulacij in refleksije na globalizacijsko soodvisnost. Pomembnejši cikli, s katerimi je uspel vzbuditi tudi zanimanje stroke, so naslednji: Zimsko vzdušje, Začarani krog življenja, Prekmurska svatba, Sprehod po Luni - Orel je pristal, Obmejni veter, Potovanje v neznano, Sprehod po versajskem parku, Made in China ter Dolgo, vroče poletje v Lakošu."
+msgstr "László Herman was born in 1961 in Gornji Lakos, Lendava.  He grew up in a working-class family. He attended bilingual school in Gaber, Lendava, and then continued his education at the Ljubljana Design High School. In the Slovenian capital, he also completed his higher and higher education, first at the Pedagogical Academy - Art and Technical Education, and later at the Pedagogical Faculty of the University of Ljubljana - Fine Arts. Since graduating, he has been working as a teacher. At the beginning of his artistic career, he was strongly influenced by photography, but later his interest turned to painting. His painting ventures and studies cover a wide range of themes and motifs: history, the scientific-technical revolution, the minority struggle, chapters from his own family history, the impasse of the little man who is a victim of political manipulation and reflections on global interdependence. The most important cycles, with which he has also managed to arouse the interest of the profession, are: Winter Atmosphere, The Enchanted Circle of Life, Prekmurska svatba / Prekmurska Wedding, A Walk on the Moon - The Eagle Has Landed, Border Wind, Journey into the Unknown, A Walk in Versailles Park, Made in China and Long, Hot Summer in Lakos."
+
+#: app/routes/_website._index.tsx:82
+msgid "László Herman se je rodil leta 1961 v Gornjem Lakošu, v Lendavi. Na začetku svoje umetniške poti je imela velik vpliv nanj fotografska umetnost, kasneje pa se je njegovo zanimanje preusmerilo k slikarstvu. Njegovi slikarski podvigi in študije obsegajo širok tematski in motivni spekter: zgodovino, znanstveno-tehnično revolucijo, manjšinsko bit, poglavja iz zgodovine lastne družine, brezizhodnost malega človeka, ki je žrtev političnih manipulacij in refleksije na globalizacijsko soodvisnost ..."
+msgstr "László Herman was born in 1961 in Gornji Lakos, Lendava. At the beginning of his artistic career, he was strongly influenced by the art of photography, but later his interest turned to painting. His painting ventures and studies cover a wide range of themes and motifs: history, the scientific-technical revolution, the minority bit, chapters from his own family history, the impasse of the little man who is a victim of political manipulation and reflections on globalisation interdependence..."
 
 #: app/routes/_website.contact.tsx:119
 msgid "Message"
@@ -61,6 +80,14 @@ msgstr "Message not sent. Please try again."
 #: app/routes/_website.contact.tsx:70
 msgid "Message sent"
 msgstr "Message sent"
+
+#: app/routes/_website.painting.$id.tsx:88
+msgid "Pošlji povpraševanje"
+msgstr "Send inquiry"
+
+#: app/routes/_website._index.tsx:96
+msgid "Read more"
+msgstr "Read more"
 
 #: app/routes/_website.contact.tsx:133
 msgid "Send"
@@ -78,7 +105,7 @@ msgstr "Slovene"
 msgid "Techniques"
 msgstr "Techniques"
 
-#: app/components/Navigation.tsx:21
+#: app/config/nav.config.ts:11
 msgid "Work"
 msgstr "Work"
 
