@@ -12,7 +12,6 @@ import {TEHNIQUE_QUERY} from '~/sanity/queries'
 import type {Serie} from '~/types/series'
 
 export const loader = async ({params, request}: LoaderFunctionArgs) => {
-  console.log(params.id)
   const {options} = await loadQueryOptions(request.headers)
   const query = TEHNIQUE_QUERY
   const initial = await loadQuery<Serie>(query, {id: params.id}, options).then(

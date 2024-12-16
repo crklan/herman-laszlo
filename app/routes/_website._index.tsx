@@ -69,7 +69,7 @@ export default function Index() {
       <div className="w-full min-h-screen bg-sky-600 dark:bg-sky-900 grid grid-cols-12 p-8 py-16 lg:p-20 lg:py-24 -mt-2 lg:mt-0">
         <div className="relative mt-12 lg:mt-0 order-2 lg:order-1 col-span-12 lg:col-span-5 flex justify-center items-center">
           <img
-            className="object-cover h-full lg:h-[70%] lg:w-3/4 w-5/6 z-10 shadow-[-20px_20px_0_5px_rgba(255,255,255,1)] lg:shadow-[-30px_30px_0_5px_rgba(255,255,255,1)]"
+            className="object-cover h-full lg:h-[70%] lg:w-3/4 w-5/6 z-10 shadow-[-20px_20px_0_5px_rgba(255,255,255,1)] lg:shadow-[-40px_40px_0_10px_rgba(255,255,255,1)]"
             src={portrait}
             alt="Portrait of Laszlo"
           />

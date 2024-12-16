@@ -27,7 +27,6 @@ import type {Serie} from '~/types/series'
 } */
 
 export const loader = async ({params, request}: LoaderFunctionArgs) => {
-  console.log(params.id)
   const {options} = await loadQueryOptions(request.headers)
   const query = SERIE_QUERY
   const initial = await loadQuery<Serie>(query, {id: params.id}, options).then(

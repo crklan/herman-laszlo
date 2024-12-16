@@ -27,7 +27,6 @@ import type {Painting} from '~/types/painting'
 } */
 
 export const loader = async ({params, request}: LoaderFunctionArgs) => {
-  console.log(params.id)
   const {options} = await loadQueryOptions(request.headers)
   const query = PAINTING_QUERY
   const initial = await loadQuery<Painting>(
