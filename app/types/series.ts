@@ -7,6 +7,7 @@ export const serieZ = z.object({
   slug: z.string().nullable(),
   cover: z.any().nullable(),
   paintings: z.any().nullable(),
+  totalCount: z.number().nullable(),
 })
 
 export type Serie = z.infer<typeof serieZ>

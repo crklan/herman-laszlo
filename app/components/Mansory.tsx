@@ -1,5 +1,5 @@
 import {useFetcher} from '@remix-run/react'
-import {useEffect, useRef, useState} from 'react'
+import {useEffect, useMemo, useRef, useState} from 'react'
 
 import type {Painting} from '~/types/painting'
 
@@ -21,14 +21,42 @@ export const Mansory = ({
   const fetcher = useFetcher<{paintings: Painting[]}>()
   const loadMoreRef = useRef<HTMLDivElement>(null)
 
+  // Calculate optimal image height for layout (normalized to consistent width)
+  const getImageHeight = (painting: Painting) => {
+    if (!painting.width || !painting.height) return 300 // fallback height
+    const aspectRatio = painting.height / painting.width
+    const normalizedWidth = 300 // base width for calculation
+    return Math.min(normalizedWidth * aspectRatio, 500) // max height of 500px
+  }
+
+  // Distribute paintings to columns using masonry algorithm
+  const columns = useMemo(() => {
+    const columnCount = 3
+    const cols: Painting[][] = Array.from({length: columnCount}, () => [])
+    const columnHeights = Array.from({length: columnCount}, () => 0)
+
+    paintings.forEach((painting) => {
+      // Find the shortest column
+      const shortestColumnIndex = columnHeights.indexOf(
+        Math.min(...columnHeights),
+      )
+
+      // Add painting to shortest column
+      cols[shortestColumnIndex].push(painting)
+
+      // Update column height (including gap)
+      columnHeights[shortestColumnIndex] += getImageHeight(painting) + 64 // 64px = gap-16 in pixels
+    })
+
+    return cols
+  }, [paintings])
+
   // Intersection Observer for infinite scroll
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && hasMore && fetcher.state === 'idle') {
-          // Create the URL with query parameters - use relative path
           const urlWithParams = `${apiEndpoint}?offset=${paintings.length}&limit=20`
-
           fetcher.load(urlWithParams)
         }
       },
@@ -47,58 +75,40 @@ export const Mansory = ({
     if (fetcher.data?.paintings) {
       const newPaintings = fetcher.data.paintings
 
-      // Only update if we actually have new paintings
       if (newPaintings.length > 0) {
         setPaintings((prev) => {
           const updatedPaintings = [...prev, ...newPaintings]
-          // Update hasMore based on the new total
           setHasMore(updatedPaintings.length < totalCount)
           return updatedPaintings
         })
       } else {
-        // No more paintings available
         setHasMore(false)
       }
     }
   }, [fetcher.data, totalCount])
 
-  // Distribute paintings across columns
-  const firstColumn = paintings.filter((_, i) => i % 3 === 0)
-  const secondColumn = paintings.filter((_, i) => i % 3 === 1)
-  const thirdColumn = paintings.filter((_, i) => i % 3 === 2)
-
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mt-20">
-        <div className="grid gap-16">
-          {firstColumn.map((painting: Painting) => (
-            <ImagePreview
-              key={painting._id}
-              data={painting}
-              isPreview={false}
-            />
-          ))}
-        </div>
+      {/* Mobile: Single column */}
+      <div className="flex flex-col gap-16 mt-20 md:hidden">
+        {paintings.map((painting: Painting) => (
+          <ImagePreview key={painting._id} data={painting} isPreview={false} />
+        ))}
+      </div>
 
-        <div className="grid gap-16">
-          {secondColumn.map((painting: Painting) => (
-            <ImagePreview
-              key={painting._id}
-              data={painting}
-              isPreview={false}
-            />
-          ))}
-        </div>
-
-        <div className="grid gap-16">
-          {thirdColumn.map((painting: Painting) => (
-            <ImagePreview
-              key={painting._id}
-              data={painting}
-              isPreview={false}
-            />
-          ))}
-        </div>
+      {/* Desktop: Three columns with masonry */}
+      <div className="hidden md:flex gap-16 mt-20 items-start">
+        {columns.map((columnPaintings, columnIndex) => (
+          <div key={columnIndex} className="flex-1 flex flex-col gap-16">
+            {columnPaintings.map((painting: Painting) => (
+              <ImagePreview
+                key={painting._id}
+                data={painting}
+                isPreview={false}
+              />
+            ))}
+          </div>
+        ))}
       </div>
 
       {/* Loading trigger element */}
@@ -110,7 +120,7 @@ export const Mansory = ({
               Loading more paintings...
             </div>
           ) : (
-            <div className="h-4" /> // Invisible trigger element
+            <div className="h-4" />
           )}
         </div>
       )}

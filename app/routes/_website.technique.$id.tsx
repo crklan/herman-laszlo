@@ -11,7 +11,7 @@ import {loadQuery} from '~/sanity/loader.server'
 import {loadQueryOptions} from '~/sanity/loadQueryOptions.server'
 import {dataset, projectId} from '~/sanity/projectDetails'
 import {TEHNIQUE_QUERY} from '~/sanity/queries'
-import type {Serie} from '~/types/series'
+import {Technique} from '~/types/technique'
 
 export const meta: MetaFunction<typeof loader> = ({data, location}) => {
   if (!data?.initial?.data) {
@@ -82,12 +82,14 @@ export const meta: MetaFunction<typeof loader> = ({data, location}) => {
 export const loader = async ({params, request}: LoaderFunctionArgs) => {
   const {options} = await loadQueryOptions(request.headers)
   const query = TEHNIQUE_QUERY
-  const initial = await loadQuery<Serie>(query, {id: params.id}, options).then(
-    (res) => ({
-      ...res,
-      data: res.data ? res.data : null,
-    }),
-  )
+  const initial = await loadQuery<Technique>(
+    query,
+    {id: params.id},
+    options,
+  ).then((res) => ({
+    ...res,
+    data: res.data ? res.data : null,
+  }))
 
   if (!initial.data) {
     throw new Response('Not found', {status: 404})
@@ -125,7 +127,11 @@ export default function Index() {
           <Trans>{data?.name}</Trans>
         </h1>
         <p className="font-body text-left">{data?.description}</p>
-        <Mansory paintings={data?.paintings} />
+        <Mansory
+          initialPaintings={data?.paintings || []}
+          totalCount={data?.totalCount || 0}
+          apiEndpoint={`/resource/techniques-paintings/${params.id}`}
+        />
       </div>
     </>
   )
