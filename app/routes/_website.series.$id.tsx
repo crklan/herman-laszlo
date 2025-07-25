@@ -120,7 +120,11 @@ export default function Index() {
         {data?.description && (
           <p className="font-body text-left lg:mt-12">{data?.description}</p>
         )}
-        <Mansory paintings={data?.paintings} />
+        <Mansory
+          initialPaintings={data?.paintings || []}
+          totalCount={data?.totalCount || 0}
+          apiEndpoint={`/resource/series-paintings/${params.id}`}
+        />
       </div>
     </>
   )

@@ -68,7 +68,7 @@ export const SERIES_QUERY = groq`*[_type == "series"]{
   "cover": *[ _type == "painting" && references(^._id) && featured == true ][0]{image}
 }`
 
-export const SERIE_QUERY = groq`*[_type == "series" && _id == $id][0]{
+/*export const SERIE_QUERY = groq`*[_type == "series" && _id == $id][0]{
   ...,
   id_,
   _createdAt,
@@ -76,7 +76,7 @@ export const SERIE_QUERY = groq`*[_type == "series" && _id == $id][0]{
   name,
   "slug": slug.current,
   "paintings": *[ _type == "painting" && references(^._id)  ]{...}
-}`
+}`*/
 
 export const TECHNIQUES_QUERY = groq`*[_type == "technique"]{
   ...,
@@ -88,7 +88,7 @@ export const TECHNIQUES_QUERY = groq`*[_type == "technique"]{
   "cover": *[ _type == "painting" && references(^._id) ][0]{image}
 }`
 
-export const TEHNIQUE_QUERY = groq`*[_type == "technique" && _id == $id][0]{
+/*export const TEHNIQUE_QUERY = groq`*[_type == "technique" && _id == $id][0]{
   ...,
   id_,
   _createdAt,
@@ -96,4 +96,69 @@ export const TEHNIQUE_QUERY = groq`*[_type == "technique" && _id == $id][0]{
   name,
   "slug": slug.current,
   "paintings": *[ _type == "painting" && references(^._id)  ]{...}
+}`*/
+
+export const PAGINATED_SERIES_PAINTINGS_QUERY = groq`*[_type == "series" && _id == $seriesId][0] {
+  "paintings": *[_type == "painting" && references(^._id)] | order(_createdAt desc) [$offset...$offset + $limit] {
+    _id,
+    title,
+    image,
+    technique,
+    width,
+    height,
+    year,
+    "series": series->name
+  }
+}`
+
+// Paginated technique paintings query (based on TEHNIQUE_QUERY)
+export const PAGINATED_TECHNIQUE_PAINTINGS_QUERY = groq`*[_type == "technique" && _id == $techniqueId][0] {
+  "paintings": *[_type == "painting" && references(^._id)] | order(_createdAt desc) [$offset...$offset + $limit] {
+    _id,
+    title,
+    image,
+    technique,
+    width,
+    height,
+    year,
+    "series": series->name
+  }
+}`
+
+// Keep the existing SERIE_QUERY and TEHNIQUE_QUERY for initial loads
+export const SERIE_QUERY = `*[_type == "series" && _id == $id][0] {
+  _id,
+  name,
+  description,
+  cover,
+  "paintings": *[_type == "painting" && references(^._id)] | order(_createdAt desc) [0...20] {
+    _id,
+    title,
+    image,
+    technique,
+    width,
+    height,
+    year,
+    "series": series->name
+  },
+  "totalCount": count(*[_type == "painting" && references(^._id)])
+}`
+
+// Update TEHNIQUE_QUERY to also include totalCount
+export const TEHNIQUE_QUERY = groq`*[_type == "technique" && _id == $id][0] {
+  _id,
+  name,
+  description,
+  "slug": slug.current,
+  "paintings": *[_type == "painting" && references(^._id)] | order(_createdAt desc) [0...20] {
+    _id,
+    title,
+    image,
+    technique,
+    width,
+    height,
+    year,
+    "series": series->name
+  },
+  "totalCount": count(*[_type == "painting" && references(^._id)])
 }`
