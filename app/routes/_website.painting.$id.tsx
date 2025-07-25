@@ -1,4 +1,5 @@
 import {Trans} from '@lingui/react/macro'
+import type {SEOHandle} from '@nasa-gcn/remix-seo'
 import type {LoaderFunctionArgs, MetaFunction} from '@remix-run/node'
 import {useLoaderData, useNavigate} from '@remix-run/react'
 import imageUrlBuilder from '@sanity/image-url'

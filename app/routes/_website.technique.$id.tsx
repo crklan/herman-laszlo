@@ -11,7 +11,10 @@ import {loadQuery} from '~/sanity/loader.server'
 import {loadQueryOptions} from '~/sanity/loadQueryOptions.server'
 import {dataset, projectId} from '~/sanity/projectDetails'
 import {TEHNIQUE_QUERY} from '~/sanity/queries'
-import {Technique} from '~/types/technique'
+import type {Technique} from '~/types/technique'
+import type {SEOHandle} from '@nasa-gcn/remix-seo'
+import {viewClient} from '~/sanity/client.server'
+import groq from 'groq'
 
 export const meta: MetaFunction<typeof loader> = ({data, location}) => {
   if (!data?.initial?.data) {
@@ -77,6 +80,33 @@ export const meta: MetaFunction<typeof loader> = ({data, location}) => {
       content: 'Home > Works > Techniques > ' + technique.name,
     },
   ]
+}
+
+export const handle: SEOHandle = {
+  getSitemapEntries: async (request) => {
+    try {
+      const techniques = await viewClient.fetch(
+        groq`*[_type == "technique"] {
+          _id,
+          _updatedAt,
+          name
+        }`,
+        {},
+        {
+          signal: AbortSignal.timeout(30000),
+        },
+      )
+
+      return techniques.map((technique: any) => ({
+        route: `/technique/${technique._id}`,
+        priority: 0.8, // Higher priority - category pages are important
+        lastmod: technique._updatedAt,
+      }))
+    } catch (error) {
+      console.error('Sitemap generation failed for techniques:', error)
+      return []
+    }
+  },
 }
 
 export const loader = async ({params, request}: LoaderFunctionArgs) => {

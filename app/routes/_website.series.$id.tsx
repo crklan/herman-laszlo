@@ -12,6 +12,9 @@ import {loadQueryOptions} from '~/sanity/loadQueryOptions.server'
 import {dataset, projectId} from '~/sanity/projectDetails'
 import {SERIE_QUERY} from '~/sanity/queries'
 import type {Serie} from '~/types/series'
+import {SEOHandle} from '@nasa-gcn/remix-seo'
+import {viewClient} from '~/sanity/client.server'
+import groq from 'groq'
 
 export const meta: MetaFunction<typeof loader> = ({data, location}) => {
   if (!data?.initial?.data) {
@@ -72,6 +75,33 @@ export const meta: MetaFunction<typeof loader> = ({data, location}) => {
     // Breadcrumb structured data
     {name: 'breadcrumb', content: 'Home > Works > Series > ' + series.name},
   ]
+}
+
+export const handle: SEOHandle = {
+  getSitemapEntries: async (request) => {
+    try {
+      const series = await viewClient.fetch(
+        groq`*[_type == "series"] {
+          _id,
+          _updatedAt,
+          name
+        }`,
+        {},
+        {
+          signal: AbortSignal.timeout(30000),
+        },
+      )
+
+      return series.map((serie: any) => ({
+        route: `/series/${serie._id}`,
+        priority: 0.8, // Higher priority - category pages are important
+        lastmod: serie._updatedAt,
+      }))
+    } catch (error) {
+      console.error('Sitemap generation failed for series:', error)
+      return []
+    }
+  },
 }
 
 export const loader = async ({params, request}: LoaderFunctionArgs) => {
