@@ -1,8 +1,7 @@
 import {Trans} from '@lingui/react/macro'
-import type {LoaderFunctionArgs} from '@remix-run/node'
+import type {LoaderFunctionArgs, MetaFunction} from '@remix-run/node'
 import {useLoaderData} from '@remix-run/react'
 import {useQuery} from '@sanity/react-loader'
-
 import {SeriesPreview} from '~/components/SeriesPreview'
 import {TechniquePreview} from '~/components/TechniquePreview'
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '~/components/ui/tabs'
@@ -12,20 +11,39 @@ import {SERIES_QUERY, TECHNIQUES_QUERY} from '~/sanity/queries'
 import type {Serie} from '~/types/series'
 import type {Technique} from '~/types/technique'
 
-/* export const meta: MetaFunction<
-  typeof loader,
-  {
-    'routes/_website': typeof layoutLoader
-  }
-> = ({matches}) => {
-  const layoutData = matches.find(
-    (match) => match.id === `routes/_website`,
-  )?.data
-  const home = layoutData ? layoutData.initial.data : null
-  const title = [home?.title, home?.siteTitle].filter(Boolean).join(' | ')
+export const meta: MetaFunction = ({location}) => {
+  const title = 'Works | László Herman'
+  const description =
+    "Browse László Herman's artwork collection. Choose to explore by series to see thematic collections, or by technique to discover different artistic methods and mediums."
+  const canonicalUrl = `https://laszloherman.com${location.pathname}`
 
-  return [{title}]
-} */
+  return [
+    {title},
+    {name: 'description', content: description},
+
+    // Open Graph
+    {property: 'og:title', content: title},
+    {property: 'og:description', content: description},
+    {property: 'og:type', content: 'website'},
+    {property: 'og:url', content: canonicalUrl},
+    {property: 'og:site_name', content: 'László Herman'},
+
+    // Twitter Card
+    {name: 'twitter:card', content: 'summary'},
+    {name: 'twitter:title', content: title},
+    {name: 'twitter:description', content: description},
+
+    // Additional SEO
+    {name: 'author', content: 'László Herman'},
+    {
+      name: 'keywords',
+      content:
+        'László Herman, artwork, paintings, series, techniques, contemporary art, portfolio, gallery',
+    },
+    {name: 'robots', content: 'index, follow'},
+    {rel: 'canonical', href: canonicalUrl},
+  ]
+}
 
 export const loader = async ({request}: LoaderFunctionArgs) => {
   const {options} = await loadQueryOptions(request.headers)

@@ -4,6 +4,7 @@ import type {
   ActionFunction,
   ActionFunctionArgs,
   LoaderFunctionArgs,
+  MetaFunction,
 } from '@remix-run/node'
 import {Form, json, useActionData, useNavigation} from '@remix-run/react'
 import {useEffect} from 'react'
@@ -13,24 +14,70 @@ import {toast} from 'sonner'
 import portrait from '~/assets/portrait.jpeg'
 import {Button} from '~/components/ui/button'
 import {Label} from '~/components/ui/label'
+import type {loader as layoutLoader} from '~/routes/_website'
 
 import {Input} from '../components/ui/input'
 import {Textarea} from '../components/ui/textarea'
 
-/* export const meta: MetaFunction<
+export const meta: MetaFunction<
   typeof loader,
   {
     'routes/_website': typeof layoutLoader
   }
-> = ({matches}) => {
+> = ({matches, location}) => {
   const layoutData = matches.find(
     (match) => match.id === `routes/_website`,
   )?.data
   const home = layoutData ? layoutData.initial.data : null
-  const title = [home?.title, home?.siteTitle].filter(Boolean).join(' | ')
 
-  return [{title}]
-} */
+  const title = `Contact | ${home?.siteTitle || 'László Herman'}`
+  const description =
+    'Get in touch with László Herman for artwork inquiries, commissions, exhibitions, or general questions. Contact the contemporary artist directly for purchasing information and collaboration opportunities.'
+
+  const canonicalUrl = `https://laszloherman.com${location.pathname}`
+
+  return [
+    {title},
+    {name: 'description', content: description},
+
+    // Open Graph
+    {property: 'og:title', content: title},
+    {property: 'og:description', content: description},
+    {property: 'og:type', content: 'website'},
+    {property: 'og:url', content: canonicalUrl},
+    {property: 'og:site_name', content: 'László Herman'},
+
+    // Twitter Card
+    {name: 'twitter:card', content: 'summary'},
+    {name: 'twitter:title', content: title},
+    {name: 'twitter:description', content: description},
+
+    // Additional SEO
+    {name: 'author', content: 'László Herman'},
+    {
+      name: 'keywords',
+      content:
+        'László Herman, contact artist, buy paintings, art inquiries, commissions, exhibitions, contemporary art, Slovenia',
+    },
+    {name: 'robots', content: 'index, follow'},
+    {rel: 'canonical', href: canonicalUrl},
+
+    // Contact-specific structured data
+    {name: 'dcterms.creator', content: 'László Herman'},
+    {name: 'dcterms.subject', content: 'Contact Information'},
+    {name: 'dcterms.type', content: 'Text'},
+
+    // Business/contact hints for search engines
+    {property: 'business:contact_data:email', content: 'info@laszloherman.com'},
+    {
+      property: 'business:contact_data:website',
+      content: 'https://laszloherman.com',
+    },
+
+    // Breadcrumb
+    {name: 'breadcrumb', content: 'Home > Contact'},
+  ]
+}
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 

@@ -1,6 +1,7 @@
 import {Trans} from '@lingui/react/macro'
-import type {LoaderFunctionArgs} from '@remix-run/node'
-import {Link, useLoaderData, useNavigate} from '@remix-run/react'
+import type {LoaderFunctionArgs, MetaFunction} from '@remix-run/node'
+import {useLoaderData, useNavigate} from '@remix-run/react'
+import imageUrlBuilder from '@sanity/image-url'
 import {useQuery} from '@sanity/react-loader'
 import {ArrowLeft} from 'lucide-react'
 
@@ -8,8 +9,75 @@ import {Mansory} from '~/components/Mansory'
 import {Button} from '~/components/ui/button'
 import {loadQuery} from '~/sanity/loader.server'
 import {loadQueryOptions} from '~/sanity/loadQueryOptions.server'
+import {dataset, projectId} from '~/sanity/projectDetails'
 import {TEHNIQUE_QUERY} from '~/sanity/queries'
 import type {Serie} from '~/types/series'
+
+export const meta: MetaFunction<typeof loader> = ({data, location}) => {
+  if (!data?.initial?.data) {
+    return [
+      {title: 'Technique Not Found | László Herman'},
+      {
+        name: 'description',
+        content: 'The requested technique could not be found.',
+      },
+    ]
+  }
+
+  const technique = data.initial.data
+  const builder = imageUrlBuilder({projectId, dataset})
+
+  // Use cover image for social sharing
+  const imageUrl = technique.cover?.image
+    ? builder
+        .image(technique.cover.image)
+        .width(1200)
+        .height(630)
+        .quality(80)
+        .url()
+    : null
+
+  const title = `${technique.name} Technique | László Herman`
+  const description = technique.description
+    ? `${technique.description} - Artworks created using ${technique.name} by László Herman.`
+    : `Explore artworks created using ${technique.name} technique by László Herman. View paintings and artistic explorations in this medium.`
+
+  const canonicalUrl = `https://laszloherman.com${location.pathname}`
+
+  return [
+    {title},
+    {name: 'description', content: description},
+
+    // Open Graph
+    {property: 'og:title', content: title},
+    {property: 'og:description', content: description},
+    {property: 'og:type', content: 'website'},
+    {property: 'og:url', content: canonicalUrl},
+    ...(imageUrl ? [{property: 'og:image', content: imageUrl}] : []),
+    {property: 'og:site_name', content: 'László Herman'},
+
+    // Twitter Card
+    {name: 'twitter:card', content: 'summary_large_image'},
+    {name: 'twitter:title', content: title},
+    {name: 'twitter:description', content: description},
+    ...(imageUrl ? [{name: 'twitter:image', content: imageUrl}] : []),
+
+    // Additional SEO
+    {name: 'author', content: 'László Herman'},
+    {
+      name: 'keywords',
+      content: `László Herman, ${technique.name}, technique, paintings, contemporary art, artistic medium`,
+    },
+    {name: 'robots', content: 'index, follow'},
+    {rel: 'canonical', href: canonicalUrl},
+
+    // Breadcrumb structured data
+    {
+      name: 'breadcrumb',
+      content: 'Home > Works > Techniques > ' + technique.name,
+    },
+  ]
+}
 
 export const loader = async ({params, request}: LoaderFunctionArgs) => {
   const {options} = await loadQueryOptions(request.headers)
