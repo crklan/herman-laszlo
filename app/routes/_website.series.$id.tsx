@@ -1,6 +1,7 @@
 import {Trans} from '@lingui/react/macro'
-import type {LoaderFunctionArgs} from '@remix-run/node'
+import type {LoaderFunctionArgs, MetaFunction} from '@remix-run/node'
 import {useLoaderData, useNavigate} from '@remix-run/react'
+import imageUrlBuilder from '@sanity/image-url'
 import {useQuery} from '@sanity/react-loader'
 import {ArrowLeft} from 'lucide-react'
 
@@ -8,23 +9,70 @@ import {Mansory} from '~/components/Mansory'
 import {Button} from '~/components/ui/button'
 import {loadQuery} from '~/sanity/loader.server'
 import {loadQueryOptions} from '~/sanity/loadQueryOptions.server'
+import {dataset, projectId} from '~/sanity/projectDetails'
 import {SERIE_QUERY} from '~/sanity/queries'
 import type {Serie} from '~/types/series'
 
-/* export const meta: MetaFunction<
-  typeof loader,
-  {
-    'routes/_website': typeof layoutLoader
+export const meta: MetaFunction<typeof loader> = ({data, location}) => {
+  if (!data?.initial?.data) {
+    return [
+      {title: 'Series Not Found | László Herman'},
+      {
+        name: 'description',
+        content: 'The requested series could not be found.',
+      },
+    ]
   }
-> = ({matches}) => {
-  const layoutData = matches.find(
-    (match) => match.id === `routes/_website`,
-  )?.data
-  const home = layoutData ? layoutData.initial.data : null
-  const title = [home?.title, home?.siteTitle].filter(Boolean).join(' | ')
 
-  return [{title}]
-} */
+  const series = data.initial.data
+  const builder = imageUrlBuilder({projectId, dataset})
+
+  // Use cover image for social sharing
+  const imageUrl = series.cover?.image
+    ? builder
+        .image(series.cover.image)
+        .width(1200)
+        .height(630)
+        .quality(80)
+        .url()
+    : null
+
+  const title = `${series.name} Series | László Herman`
+  const description = `Explore the ${series.name} series by László Herman. View all paintings and artworks in this thematic collection.`
+
+  const canonicalUrl = `https://laszloherman.com${location.pathname}`
+
+  return [
+    {title},
+    {name: 'description', content: description},
+
+    // Open Graph
+    {property: 'og:title', content: title},
+    {property: 'og:description', content: description},
+    {property: 'og:type', content: 'website'},
+    {property: 'og:url', content: canonicalUrl},
+    ...(imageUrl ? [{property: 'og:image', content: imageUrl}] : []),
+    {property: 'og:site_name', content: 'László Herman'},
+
+    // Twitter Card
+    {name: 'twitter:card', content: 'summary_large_image'},
+    {name: 'twitter:title', content: title},
+    {name: 'twitter:description', content: description},
+    ...(imageUrl ? [{name: 'twitter:image', content: imageUrl}] : []),
+
+    // Additional SEO
+    {name: 'author', content: 'László Herman'},
+    {
+      name: 'keywords',
+      content: `László Herman, ${series.name}, series, paintings, contemporary art, artwork collection`,
+    },
+    {name: 'robots', content: 'index, follow'},
+    {rel: 'canonical', href: canonicalUrl},
+
+    // Breadcrumb structured data
+    {name: 'breadcrumb', content: 'Home > Works > Series > ' + series.name},
+  ]
+}
 
 export const loader = async ({params, request}: LoaderFunctionArgs) => {
   const {options} = await loadQueryOptions(request.headers)

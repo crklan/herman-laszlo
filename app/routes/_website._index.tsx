@@ -5,7 +5,6 @@ import {useQuery} from '@sanity/react-loader'
 
 import background from '~/assets/background.png'
 import portrait from '~/assets/new-portrait.jpeg'
-import {Mansory} from '~/components/Mansory'
 import {Button} from '~/components/ui/button'
 import type {loader as layoutLoader} from '~/routes/_website'
 import {loadQuery} from '~/sanity/loader.server'
@@ -18,14 +17,60 @@ export const meta: MetaFunction<
   {
     'routes/_website': typeof layoutLoader
   }
-> = ({matches}) => {
+> = ({matches, location}) => {
   const layoutData = matches.find(
     (match) => match.id === `routes/_website`,
   )?.data
   const home = layoutData ? layoutData.initial.data : null
-  const title = [home?.title, home?.siteTitle].filter(Boolean).join(' | ')
 
-  return [{title}]
+  const title =
+    home?.title && home?.siteTitle
+      ? `${home.title} | ${home.siteTitle}`
+      : 'László Herman | Contemporary Artist'
+
+  const description =
+    'László Herman - Contemporary artist born in 1961 in Gornji Lakoš, Lendava. Explore paintings spanning history, minority identity, family heritage, and globalization themes.'
+
+  const canonicalUrl = `https://laszloherman.com${location.pathname}`
+
+  return [
+    {title},
+    {name: 'description', content: description},
+
+    // Open Graph
+    {property: 'og:title', content: title},
+    {property: 'og:description', content: description},
+    {property: 'og:type', content: 'website'},
+    {property: 'og:url', content: canonicalUrl},
+    {property: 'og:site_name', content: 'László Herman'},
+    {property: 'og:image', content: `https://laszloherman.com${portrait}`},
+    {property: 'og:image:alt', content: 'Portrait of László Herman'},
+
+    // Twitter Card
+    {name: 'twitter:card', content: 'summary_large_image'},
+    {name: 'twitter:title', content: title},
+    {name: 'twitter:description', content: description},
+    {name: 'twitter:image', content: `https://laszloherman.com${portrait}`},
+    {name: 'twitter:image:alt', content: 'Portrait of László Herman'},
+
+    // Additional SEO
+    {name: 'author', content: 'László Herman'},
+    {
+      name: 'keywords',
+      content:
+        'László Herman, contemporary artist, painter, Lendava, Slovenian art, paintings, gallery, artwork',
+    },
+    {name: 'robots', content: 'index, follow'},
+    {rel: 'canonical', href: canonicalUrl},
+
+    // Artist-specific structured data hints
+    {name: 'dcterms.creator', content: 'László Herman'},
+    {name: 'dcterms.type', content: 'Text'},
+    {name: 'geo.placename', content: 'Lendava, Slovenia'},
+
+    // Homepage specific
+    {property: 'og:locale', content: 'sl_SI'},
+  ]
 }
 
 export const loader = async ({request}: LoaderFunctionArgs) => {

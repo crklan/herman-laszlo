@@ -1,22 +1,66 @@
 import {Trans} from '@lingui/react/macro'
-import type {LoaderFunctionArgs} from '@remix-run/node'
+import type {LoaderFunctionArgs, MetaFunction} from '@remix-run/node'
 
 import portrait from '~/assets/old-portrait.jpeg'
+import type {loader as layoutLoader} from '~/routes/_website'
 
-/* export const meta: MetaFunction<
+export const meta: MetaFunction<
   typeof loader,
   {
     'routes/_website': typeof layoutLoader
   }
-> = ({matches}) => {
+> = ({matches, location}) => {
   const layoutData = matches.find(
     (match) => match.id === `routes/_website`,
   )?.data
   const home = layoutData ? layoutData.initial.data : null
-  const title = [home?.title, home?.siteTitle].filter(Boolean).join(' | ')
 
-  return [{title}]
-} */
+  const title = `About | ${home?.siteTitle || 'László Herman'}`
+  const description =
+    'Learn about László Herman, contemporary artist born in 1961 in Gornji Lakoš, Lendava. Discover his artistic journey from photography to painting, exploring themes of history, science, minority identity, and family heritage.'
+
+  const canonicalUrl = `https://laszloherman.com${location.pathname}`
+
+  return [
+    {title},
+    {name: 'description', content: description},
+
+    // Open Graph
+    {property: 'og:title', content: title},
+    {property: 'og:description', content: description},
+    {property: 'og:type', content: 'profile'},
+    {property: 'og:url', content: canonicalUrl},
+    {property: 'og:site_name', content: 'László Herman'},
+
+    // Profile specific Open Graph
+    {property: 'profile:first_name', content: 'László'},
+    {property: 'profile:last_name', content: 'Herman'},
+
+    // Twitter Card
+    {name: 'twitter:card', content: 'summary'},
+    {name: 'twitter:title', content: title},
+    {name: 'twitter:description', content: description},
+
+    // Additional SEO
+    {name: 'author', content: 'László Herman'},
+    {
+      name: 'keywords',
+      content:
+        'László Herman, artist biography, contemporary artist, Lendava, Slovenia, painter, artistic journey, photography, painting',
+    },
+    {name: 'robots', content: 'index, follow'},
+    {rel: 'canonical', href: canonicalUrl},
+
+    // Biographical structured data
+    {name: 'dcterms.creator', content: 'László Herman'},
+    {name: 'dcterms.subject', content: 'Artist Biography'},
+    {name: 'dcterms.type', content: 'Text'},
+    {name: 'geo.placename', content: 'Gornji Lakoš, Lendava, Slovenia'},
+
+    // Breadcrumb
+    {name: 'breadcrumb', content: 'Home > About'},
+  ]
+}
 
 export const loader = async ({request}: LoaderFunctionArgs) => {
   return null
