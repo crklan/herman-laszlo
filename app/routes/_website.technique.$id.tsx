@@ -1,20 +1,21 @@
 import {Trans} from '@lingui/react/macro'
+import type {SEOHandle} from '@nasa-gcn/remix-seo'
 import type {LoaderFunctionArgs, MetaFunction} from '@remix-run/node'
 import {useLoaderData, useNavigate} from '@remix-run/react'
 import imageUrlBuilder from '@sanity/image-url'
 import {useQuery} from '@sanity/react-loader'
+import groq from 'groq'
 import {ArrowLeft} from 'lucide-react'
 
 import {Mansory} from '~/components/Mansory'
 import {Button} from '~/components/ui/button'
+import {viewClient} from '~/sanity/client.server'
 import {loadQuery} from '~/sanity/loader.server'
 import {loadQueryOptions} from '~/sanity/loadQueryOptions.server'
 import {dataset, projectId} from '~/sanity/projectDetails'
 import {TEHNIQUE_QUERY} from '~/sanity/queries'
 import type {Technique} from '~/types/technique'
-import type {SEOHandle} from '@nasa-gcn/remix-seo'
-import {viewClient} from '~/sanity/client.server'
-import groq from 'groq'
+import {serverOnly$} from 'vite-env-only/macros'
 
 export const meta: MetaFunction<typeof loader> = ({data, location}) => {
   if (!data?.initial?.data) {
@@ -83,7 +84,7 @@ export const meta: MetaFunction<typeof loader> = ({data, location}) => {
 }
 
 export const handle: SEOHandle = {
-  getSitemapEntries: async (request) => {
+  getSitemapEntries: serverOnly$(async (request) => {
     try {
       const techniques = await viewClient.fetch(
         groq`*[_type == "technique"] {
@@ -106,7 +107,7 @@ export const handle: SEOHandle = {
       console.error('Sitemap generation failed for techniques:', error)
       return []
     }
-  },
+  }),
 }
 
 export const loader = async ({params, request}: LoaderFunctionArgs) => {

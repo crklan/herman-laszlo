@@ -4,10 +4,13 @@ import type {LoaderFunctionArgs, MetaFunction} from '@remix-run/node'
 import {useLoaderData, useNavigate} from '@remix-run/react'
 import imageUrlBuilder from '@sanity/image-url'
 import {useQuery} from '@sanity/react-loader'
+import groq from 'groq'
 import {ArrowLeft} from 'lucide-react'
+import {serverOnly$} from 'vite-env-only/macros'
 
 import {ImagePreview} from '~/components/ImagePreview'
 import {Button} from '~/components/ui/button'
+import {viewClient} from '~/sanity/client.server'
 import {loadQuery} from '~/sanity/loader.server'
 import {loadQueryOptions} from '~/sanity/loadQueryOptions.server'
 import {dataset, projectId} from '~/sanity/projectDetails'
@@ -89,6 +92,33 @@ export const meta: MetaFunction<typeof loader> = ({data, location, params}) => {
     // Breadcrumb
     {name: 'breadcrumb', content: breadcrumb},
   ]
+}
+
+export const handle: SEOHandle = {
+  getSitemapEntries: serverOnly$(async () => {
+    try {
+      const paintings = await viewClient.fetch(
+        groq`*[_type == "painting"] {
+        _id,
+        _updatedAt,
+        title
+      }`,
+        {},
+        {
+          signal: AbortSignal.timeout(30000),
+        },
+      )
+
+      return paintings.map((painting: any) => ({
+        route: `/painting/${painting._id}`,
+        priority: 0.7,
+        lastmod: painting._updatedAt,
+      }))
+    } catch (error) {
+      console.error('Sitemap generation failed for paintings:', error)
+      return []
+    }
+  }),
 }
 
 export const loader = async ({params, request}: LoaderFunctionArgs) => {
