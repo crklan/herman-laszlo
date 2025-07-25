@@ -1,3 +1,4 @@
+import type {SEOHandle} from '@nasa-gcn/remix-seo'
 import type {LoaderFunctionArgs} from '@remix-run/node'
 import {json} from '@remix-run/node'
 
@@ -24,4 +25,8 @@ export const loader = async ({params, request}: LoaderFunctionArgs) => {
   )
 
   return json({paintings: result.data?.paintings || []})
+}
+
+export const handle: SEOHandle = {
+  getSitemapEntries: () => null,
 }

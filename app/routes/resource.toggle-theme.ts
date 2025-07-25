@@ -1,3 +1,4 @@
+import type {SEOHandle} from '@nasa-gcn/remix-seo'
 import type {ActionFunction, LoaderFunction} from '@remix-run/node'
 import {json, redirect} from '@remix-run/node'
 
@@ -21,3 +22,7 @@ export const action: ActionFunction = async ({request}) => {
 }
 
 export const loader: LoaderFunction = () => redirect('/', {status: 404})
+
+export const handle: SEOHandle = {
+  getSitemapEntries: () => null,
+}
