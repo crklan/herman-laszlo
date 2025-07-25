@@ -3,6 +3,7 @@ import {vitePlugin as remix} from '@remix-run/dev'
 import {installGlobals} from '@remix-run/node'
 import {vercelPreset} from '@vercel/remix/vite'
 import {defineConfig} from 'vite'
+import {envOnlyMacros} from 'vite-env-only'
 import macrosPlugin from 'vite-plugin-babel-macros'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
@@ -19,6 +20,7 @@ export default defineConfig({
     macrosPlugin(),
     lingui(),
     tsconfigPaths(),
+    envOnlyMacros(),
   ],
   optimizeDeps: {
     exclude: ['@resvg/resvg-js'],
