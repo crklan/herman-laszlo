@@ -87,9 +87,22 @@ export const loader = async ({request}: LoaderFunctionArgs) => {
 
 export const action: ActionFunction = async ({request}: ActionFunctionArgs) => {
   const formData = await request.formData()
+
+  // Honeypot check - if this field is filled, it's likely a bot
+  const honeypot = formData.get('website') as string
+  if (honeypot) {
+    // Return success to avoid revealing the honeypot to bots
+    return json({success: true}, 200)
+  }
+
   const name = formData.get('firstname') as string
   const email = formData.get('email') as string
   const message = formData.get('content') as string
+
+  // Basic validation
+  if (!name || !email || !message) {
+    return json({success: false, error: 'All fields are required'}, 400)
+  }
 
   const {error} = await resend.emails.send({
     from: `Webpage <no-reply@laszloherman.com>`,
@@ -143,6 +156,19 @@ export default function Index() {
             </a>
           </p>
           <Form method="post" className="grid grid-cols-12 gap-5">
+            {/* Honeypot field - hidden from users but visible to bots */}
+            <div className="hidden">
+              <Label htmlFor="website">Website (leave blank)</Label>
+              <Input
+                type="text"
+                name="website"
+                id="website"
+                tabIndex={-1}
+                autoComplete="off"
+                placeholder=""
+              />
+            </div>
+
             <div className="col-span-12 lg:col-span-6">
               <Label className="mb-4 block" htmlFor="firstname">
                 <Trans>First name</Trans>
