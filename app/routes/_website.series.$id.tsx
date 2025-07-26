@@ -146,16 +146,20 @@ export default function Index() {
         <ArrowLeft strokeWidth={1} />
         <Trans>Back</Trans>
       </Button>
-      <div className="flex flex-col text-center px-12 py-4 lg:px-24 xl:px-44 lg:py-2">
+      <div className="flex flex-col items-center text-center px-12 py-4 lg:px-24 xl:px-44 lg:py-2">
         <h1 className="font-display text-5xl ">{data?.name}</h1>
         {data?.description && (
-          <p className="font-body text-left lg:mt-12">{data?.description}</p>
+          <p className="font-body text-left lg:mt-12 max-w-5xl">
+            {data?.description}
+          </p>
         )}
-        <Mansory
-          initialPaintings={data?.paintings || []}
-          totalCount={data?.totalCount || 0}
-          apiEndpoint={`/resource/series-paintings/${params.id}`}
-        />
+        <div className="w-full">
+          <Mansory
+            initialPaintings={data?.paintings || []}
+            totalCount={data?.totalCount || 0}
+            apiEndpoint={`/resource/series-paintings/${params.id}`}
+          />
+        </div>
       </div>
     </>
   )
