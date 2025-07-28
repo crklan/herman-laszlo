@@ -59,20 +59,25 @@ function isBotRequest(userAgent: string | null) {
   return false
 }
 
-function handleBotRequest(
+async function handleBotRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
   remixContext: EntryContext,
 ) {
+  const locale = await linguiServer.getLocale(request)
+  await loadCatalog(locale)
+
   return new Promise((resolve, reject) => {
     let shellRendered = false
     const {pipe, abort} = renderToPipeableStream(
-      <RemixServer
-        context={remixContext}
-        url={request.url}
-        abortDelay={ABORT_DELAY}
-      />,
+      <I18nProvider i18n={i18n}>
+        <RemixServer
+          context={remixContext}
+          url={request.url}
+          abortDelay={ABORT_DELAY}
+        />
+      </I18nProvider>,
       {
         onAllReady() {
           shellRendered = true
