@@ -32,7 +32,16 @@ import {linguiServer, localeCookie} from './modules/lingui/lingui.server'
 export const links: LinksFunction = () => {
   return [
     {rel: 'preconnect', href: 'https://cdn.sanity.io'},
-    {rel: 'stylesheet', href: 'https://use.typekit.net/zde6oty.css'},
+    {rel: 'preconnect', href: 'https://use.typekit.net'},
+    {
+      rel: 'preload',
+      href: 'https://use.typekit.net/zde6oty.css',
+      as: 'style',
+    },
+    {
+      rel: 'stylesheet',
+      href: 'https://use.typekit.net/zde6oty.css',
+    },
     {rel: 'stylesheet', href: styles},
     {
       rel: 'icon',
