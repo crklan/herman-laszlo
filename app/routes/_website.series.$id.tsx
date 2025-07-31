@@ -149,7 +149,7 @@ export default function Index() {
       <div className="flex flex-col items-center text-center px-12 py-4 lg:px-24 xl:px-44 lg:py-2">
         <h1 className="font-display text-5xl ">{data?.name}</h1>
         {data?.description && (
-          <p className="font-body text-left lg:mt-12 max-w-5xl">
+          <p className="font-body text-left mt-6 lg:mt-12 max-w-5xl">
             {data?.description}
           </p>
         )}
