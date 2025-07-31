@@ -3,7 +3,7 @@ import type {LoaderFunctionArgs, MetaFunction} from '@remix-run/node'
 import {Link, useLoaderData} from '@remix-run/react'
 import {useQuery} from '@sanity/react-loader'
 
-import background from '~/assets/background.webp'
+import background from '~/assets/background.avif'
 import portrait from '~/assets/new-portrait.jpeg'
 import {Button} from '~/components/ui/button'
 import type {loader as layoutLoader} from '~/routes/_website'
