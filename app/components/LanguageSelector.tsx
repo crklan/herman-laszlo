@@ -22,6 +22,7 @@ export function getLanguages(): Array<{
   return [
     {key: 'en', label: msg`English`},
     {key: 'sl', label: msg`Slovene`},
+    {key: 'hu', label: msg`Hungarian`},
   ]
 }
 
