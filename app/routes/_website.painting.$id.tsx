@@ -10,6 +10,7 @@ import {serverOnly$} from 'vite-env-only/macros'
 
 import {ImagePreview} from '~/components/ImagePreview'
 import {Button} from '~/components/ui/button'
+import {linguiServer} from '~/modules/lingui/lingui.server'
 import {viewClient} from '~/sanity/client.server'
 import {loadQuery} from '~/sanity/loader.server'
 import {loadQueryOptions} from '~/sanity/loadQueryOptions.server'
@@ -124,9 +125,10 @@ export const handle: SEOHandle = {
 export const loader = async ({params, request}: LoaderFunctionArgs) => {
   const {options} = await loadQueryOptions(request.headers)
   const query = PAINTING_QUERY
+  const locale = await linguiServer.getLocale(request)
   const initial = await loadQuery<Painting>(
     query,
-    {id: params.id},
+    {id: params.id, locale},
     options,
   ).then((res) => ({
     ...res,
@@ -171,8 +173,8 @@ export default function Index() {
           </div>
           <div className="col-span-12 lg:col-span-6 flex flex-col justify-center items-start gap-1 mt-12 lg:mt-0">
             <h2 className="text-4xl">{data?.title}</h2>
-            <span className="mb-4">{data?.series}</span>
-            <span>{data?.technique}</span>
+            <span className="mb-4">{data?.series?.name}</span>
+            <span>{data?.technique?.name}</span>
             <span>{`${data?.width}x${data?.height} cm`}</span>
             <span>{data?.year}</span>
             <div className="border-b border-gray-400 w-full my-4"></div>

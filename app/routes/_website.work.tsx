@@ -10,6 +10,7 @@ import {loadQueryOptions} from '~/sanity/loadQueryOptions.server'
 import {SERIES_QUERY, TECHNIQUES_QUERY} from '~/sanity/queries'
 import type {Serie} from '~/types/series'
 import type {Technique} from '~/types/technique'
+import {linguiServer} from '~/modules/lingui/lingui.server'
 
 export const meta: MetaFunction = ({location}) => {
   const title = 'Works | László Herman'
@@ -47,9 +48,13 @@ export const meta: MetaFunction = ({location}) => {
 
 export const loader = async ({request}: LoaderFunctionArgs) => {
   const {options} = await loadQueryOptions(request.headers)
+  const locale = await linguiServer.getLocale(request)
+
   const seriesQuery = SERIES_QUERY
-  const params = {}
-  const seriesInital = await loadQuery<Serie[]>(
+  const params = {
+    locale: locale,
+  }
+  const seriesResponse = await loadQuery<Serie[]>(
     seriesQuery,
     params,
     options,
@@ -58,7 +63,7 @@ export const loader = async ({request}: LoaderFunctionArgs) => {
     data: res.data ? res.data : null,
   }))
   const techniquesQuery = TECHNIQUES_QUERY
-  const techniquesInital = await loadQuery<Technique[]>(
+  const techniqueResponse = await loadQuery<Technique[]>(
     techniquesQuery,
     params,
     options,
@@ -67,13 +72,13 @@ export const loader = async ({request}: LoaderFunctionArgs) => {
     data: res.data ? res.data : null,
   }))
 
-  if (!seriesInital.data) {
+  if (!seriesResponse.data) {
     throw new Response('Not found', {status: 404})
   }
 
   return {
-    series: {initial: seriesInital, query: seriesQuery, params},
-    techniques: {initial: techniquesInital, query: techniquesQuery, params},
+    series: {initial: seriesResponse, query: seriesQuery, params},
+    techniques: {initial: techniqueResponse, query: techniquesQuery, params},
   }
 }
 
