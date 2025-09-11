@@ -12,6 +12,7 @@ import {HOME_QUERY} from '~/sanity/queries'
 import type {HomeDocument} from '~/types/home'
 import {homeZ} from '~/types/home'
 import type {ThemePreference} from '~/types/themePreference'
+import {linguiServer} from '~/modules/lingui/lingui.server'
 
 const SanityLiveMode = lazy(() =>
   import('~/components/SanityLiveMode').then((module) => ({
@@ -26,10 +27,12 @@ const ExitPreview = lazy(() =>
 
 export const loader = async ({request}: LoaderFunctionArgs) => {
   const {preview, options} = await loadQueryOptions(request.headers)
-
+  const locale = await linguiServer.getLocale(request)
   // Content from Sanity used in the global layout
   const query = HOME_QUERY
-  const params = {}
+  const params = {
+    locale,
+  }
   const initial = await loadQuery<HomeDocument>(query, params, options).then(
     (res) => ({
       ...res,

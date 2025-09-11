@@ -2,6 +2,7 @@ import {visionTool} from '@sanity/vision'
 import {defineConfig} from 'sanity'
 import {defineLocations, presentationTool} from 'sanity/presentation'
 import {structureTool} from 'sanity/structure'
+import {internationalizedArray} from 'sanity-plugin-internationalized-array'
 
 import {STUDIO_BASEPATH} from '~/sanity/constants'
 import {projectDetails} from '~/sanity/projectDetails'
@@ -41,6 +42,15 @@ export default defineConfig({
       },
     }),
     visionTool(),
+    internationalizedArray({
+      languages: [
+        {id: 'sl', title: 'Slovene'},
+        {id: 'en', title: 'English'},
+        {id: 'hu', title: 'Hungarian'},
+      ],
+      defaultLanguages: ['en'],
+      fieldTypes: ['string', 'text'],
+    }),
   ],
   basePath: STUDIO_BASEPATH,
   schema: {

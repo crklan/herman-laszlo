@@ -16,6 +16,7 @@ import {loadQueryOptions} from '~/sanity/loadQueryOptions.server'
 import {dataset, projectId} from '~/sanity/projectDetails'
 import {SERIE_QUERY} from '~/sanity/queries'
 import type {Serie} from '~/types/series'
+import {linguiServer} from '~/modules/lingui/lingui.server'
 
 export const meta: MetaFunction<typeof loader> = ({data, location}) => {
   if (!data?.initial?.data) {
@@ -85,7 +86,7 @@ export const handle: SEOHandle = {
         groq`*[_type == "series"] {
           _id,
           _updatedAt,
-          name
+          "name": name[_key == "en"][0].value,
         }`,
         {},
         {
@@ -107,13 +108,17 @@ export const handle: SEOHandle = {
 
 export const loader = async ({params, request}: LoaderFunctionArgs) => {
   const {options} = await loadQueryOptions(request.headers)
+  const locale = await linguiServer.getLocale(request)
   const query = SERIE_QUERY
-  const initial = await loadQuery<Serie>(query, {id: params.id}, options).then(
-    (res) => ({
-      ...res,
-      data: res.data ? res.data : null,
-    }),
-  )
+
+  const initial = await loadQuery<Serie>(
+    query,
+    {id: params.id, locale: locale},
+    options,
+  ).then((res) => ({
+    ...res,
+    data: res.data ? res.data : null,
+  }))
 
   if (!initial.data) {
     throw new Response('Not found', {status: 404})

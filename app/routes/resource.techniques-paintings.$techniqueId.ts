@@ -6,12 +6,13 @@ import {loadQuery} from '~/sanity/loader.server'
 import {loadQueryOptions} from '~/sanity/loadQueryOptions.server'
 import {PAGINATED_TECHNIQUE_PAINTINGS_QUERY} from '~/sanity/queries'
 import type {Painting} from '~/types/painting'
+import {linguiServer} from '~/modules/lingui/lingui.server'
 
 export const loader = async ({params, request}: LoaderFunctionArgs) => {
   const url = new URL(request.url)
   const offset = parseInt(url.searchParams.get('offset') || '0')
   const limit = parseInt(url.searchParams.get('limit') || '20')
-
+  const locale = await linguiServer.getLocale(request)
   const {options} = await loadQueryOptions(request.headers)
 
   const result = await loadQuery<{paintings: Painting[]}>(
@@ -20,6 +21,7 @@ export const loader = async ({params, request}: LoaderFunctionArgs) => {
       techniqueId: params.techniqueId,
       offset,
       limit,
+      locale,
     },
     options,
   )

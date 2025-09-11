@@ -7,7 +7,7 @@ export const paintingType = defineType({
   fields: [
     defineField({
       name: 'title',
-      type: 'string',
+      type: 'internationalizedArrayString',
     }),
     defineField({
       name: 'slug',
@@ -65,4 +65,22 @@ export const paintingType = defineType({
       type: 'boolean',
     }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      seriesName: 'series.name',
+    },
+    prepare({title, seriesName}) {
+      return {
+        title: Array.isArray(title)
+          ? (title.find((t: any) => t._key === 'en')?.value ??
+            title[0]?.value ??
+            'Untitled')
+          : title || 'Untitled',
+        subtitle:
+          seriesName.find((s: any) => s.value != null || s.value != undefined)
+            ?.value || 'Untitled',
+      }
+    },
+  },
 })

@@ -11,6 +11,7 @@ import {loadQuery} from '~/sanity/loader.server'
 import {loadQueryOptions} from '~/sanity/loadQueryOptions.server'
 import {PAINTINGS_QUERY} from '~/sanity/queries'
 import type {Painting} from '~/types/painting'
+import {linguiServer} from '~/modules/lingui/lingui.server'
 
 export const meta: MetaFunction<
   typeof loader,
@@ -76,7 +77,10 @@ export const meta: MetaFunction<
 export const loader = async ({request}: LoaderFunctionArgs) => {
   const {options} = await loadQueryOptions(request.headers)
   const query = PAINTINGS_QUERY
-  const params = {}
+  const locale = await linguiServer.getLocale(request)
+  const params = {
+    locale,
+  }
   const initial = await loadQuery<Painting[]>(query, params, options).then(
     (res) => ({
       ...res,
