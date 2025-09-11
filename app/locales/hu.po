@@ -1,17 +1,11 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-12-07 17:20+0100\n"
+"POT-Creation-Date: 2025-09-12 00:55+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: en\n"
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Plural-Forms: \n"
+"Language: hu\n"
 
 #. placeholder {0}: data?.name
 #: app/routes/_website.technique.$id.tsx:160
@@ -22,22 +16,22 @@ msgstr ""
 #: app/routes/_website._index.tsx:128
 #: app/config/nav.config.ts:12
 msgid "About"
-msgstr "About"
+msgstr "Festőről"
 
 #: app/routes/_website.technique.$id.tsx:156
 #: app/routes/_website.series.$id.tsx:152
 #: app/routes/_website.painting.$id.tsx:167
 msgid "Back"
-msgstr "Back"
+msgstr "Vissza"
 
 #: app/routes/_website.contact.tsx:149
 #: app/config/nav.config.ts:13
 msgid "Contact"
-msgstr "Contact"
+msgstr "Érintkezés"
 
 #: app/routes/_website.contact.tsx:152
 msgid "Contact us via mail or fill the form bellow."
-msgstr "Contact us via mail or fill the form bellow."
+msgstr "Lépjen kapcsolatba velünk e-mailben, vagy töltse ki az alábbi űrlapot."
 
 #: app/routes/_website.contact.tsx:186
 #: app/routes/_website.contact.tsx:188
@@ -46,49 +40,49 @@ msgstr "Email"
 
 #: app/components/LanguageSelector.tsx:23
 msgid "English"
-msgstr "English"
+msgstr "angol"
 
 #: app/routes/_website.contact.tsx:174
 #: app/routes/_website.contact.tsx:176
 msgid "First name"
-msgstr "First name"
+msgstr "Keresztnév"
 
 #: app/config/nav.config.ts:10
 msgid "Home"
-msgstr "Home"
+msgstr "Otthon"
 
 #: app/components/LanguageSelector.tsx:25
 msgid "Hungarian"
-msgstr "Hungarian"
+msgstr "magyar"
 
 #: app/routes/_website.contact.tsx:180
 #: app/routes/_website.contact.tsx:182
 msgid "Last name"
-msgstr "Last name"
+msgstr "Vezetéknév"
 
 #: app/routes/_website.about.tsx:85
 msgid "László Herman  se je rodil leta 1961 v Gornjem Lakošu, v Lendavi.  Odraščal je v delovski-kmečki družini. Dvojezično šolo je obiskoval v Gaberju v Lendavi, nato pa šolanje nadaljeval na ljubljanski srednji šoli za oblikovanje. V slovenski prestolnici je zaključil tudi višješolsko in visokošolsko izobraževanje, in sicer najprej na Pedagoški akademiji - smer likovna in tehnična vzgoja, kasneje pa še na Pedagoški fakulteti Univerze v Ljubljani - smer likovna umetnost. Odkar je zaključil šolanje, dela kot učitelj. Na začetku svoje umetniške poti je imela velik vpliv nanj fotografska umetnost, kasneje pa se je njegovo zanimanje preusmerilo k slikarstvu. Njegovi slikarski podvigi in študije obsegajo širok tematski in motivni spekter: zgodovino, znanstveno-tehnično revolucijo, manjšinsko bit, poglavja iz zgodovine lastne družine, brezizhodnost malega človeka, ki je žrtev političnih manipulacij in refleksije na globalizacijsko soodvisnost. Pomembnejši cikli, s katerimi je uspel vzbuditi tudi zanimanje stroke, so naslednji: Zimsko vzdušje, Začarani krog življenja, Prekmurska svatba, Sprehod po Luni - Orel je pristal, Obmejni veter, Potovanje v neznano, Sprehod po versajskem parku, Made in China ter Dolgo, vroče poletje v Lakošu."
-msgstr "László Herman was born in 1961 in Gornji Lakos, Lendava.  He grew up in a working-class family. He attended bilingual school in Gaber, Lendava, and then continued his education at the Ljubljana Design High School. In the Slovenian capital, he also completed his higher and higher education, first at the Pedagogical Academy - Art and Technical Education, and later at the Pedagogical Faculty of the University of Ljubljana - Fine Arts. Since graduating, he has been working as a teacher. At the beginning of his artistic career, he was strongly influenced by photography, but later his interest turned to painting. His painting ventures and studies cover a wide range of themes and motifs: history, the scientific-technical revolution, the minority struggle, chapters from his own family history, the impasse of the little man who is a victim of political manipulation and reflections on global interdependence. The most important cycles, with which he has also managed to arouse the interest of the profession, are: Winter Atmosphere, The Enchanted Circle of Life, Prekmurska svatba / Prekmurska Wedding, A Walk on the Moon - The Eagle Has Landed, Border Wind, Journey into the Unknown, A Walk in Versailles Park, Made in China and Long, Hot Summer in Lakos."
+msgstr "Herman László 1961-ben született a lendvai Gornji Lakosban. Munkáscsaládban nőtt fel. Kéttannyelvű iskolába járt a lendvai Gaberben, majd a Ljubljanai Formatervezési Gimnáziumban folytatta tanulmányait. A szlovén fővárosban végezte felsőfokú tanulmányait is, először a Pedagógiai Akadémián - Művészeti és Műszaki Pedagógia Szakon, később pedig a Ljubljanai Egyetem Pedagógiai Karán - Képzőművészeti Karon. A diploma megszerzése óta tanárként dolgozik. Művészi pályafutása elején erősen hatott rá a fotográfia, de később érdeklődése a festészet felé fordult. Festészeti vállalkozásai és tanulmányai a témák és motívumok széles skáláját ölelik fel: történelmet, a tudományos-technikai forradalmat, a kisebbségi küzdelmet, fejezeteket saját családtörténetéből, a politikai manipuláció áldozatává vált kisember patthelyzetét és a globális egymásrautaltságról szóló elmélkedéseket. A legfontosabb ciklusok, amelyekkel a szakma érdeklődését is sikerült felkeltenie, a következők: Téli hangulat, Az élet elvarázsolt körforgása, Muravidéki esküvő, Séta a Holdon - A sas leszállt, Határszél, Utazás az ismeretlenbe, Séta a versailles-i parkban, Kínában készült és Hosszú, forró nyár Lakosban."
 
 #: app/routes/_website._index.tsx:131
 msgid "László Herman se je rodil leta 1961 v Gornjem Lakošu, v Lendavi. Na začetku svoje umetniške poti je imela velik vpliv nanj fotografska umetnost, kasneje pa se je njegovo zanimanje preusmerilo k slikarstvu. Njegovi slikarski podvigi in študije obsegajo širok tematski in motivni spekter: zgodovino, znanstveno-tehnično revolucijo, manjšinsko bit, poglavja iz zgodovine lastne družine, brezizhodnost malega človeka, ki je žrtev političnih manipulacij in refleksije na globalizacijsko soodvisnost ..."
-msgstr "László Herman was born in 1961 in Gornji Lakos, Lendava. At the beginning of his artistic career, he was strongly influenced by the art of photography, but later his interest turned to painting. His painting ventures and studies cover a wide range of themes and motifs: history, the scientific-technical revolution, the minority bit, chapters from his own family history, the impasse of the little man who is a victim of political manipulation and reflections on globalisation interdependence..."
+msgstr "Herman László 1961-ben született a lendvai Gornji Lakosban. Művészi pályafutása kezdetén erősen hatott rá a fotográfia, de később érdeklődése a festészet felé fordult. Festészeti vállalkozásai és tanulmányai a témák és motívumok széles skáláját ölelik fel: történelmet, a tudományos-technikai forradalmat, a kisebbségi részt, fejezeteket saját családtörténetéből, a politikai manipuláció áldozatává vált kisember patthelyzetét és a globalizáció egymásrautaltságáról szóló elmélkedéseket..."
 
 #: app/routes/_website.contact.tsx:192
 msgid "Message"
-msgstr "Message"
+msgstr "Üzenet"
 
 #: app/routes/_website.contact.tsx:132
 msgid "Message not sent. Please try again."
-msgstr "Message not sent. Please try again."
+msgstr "Az üzenet nem küldhető el. Kérjük, próbálja újra."
 
 #: app/routes/_website.contact.tsx:130
 msgid "Message sent"
-msgstr "Message sent"
+msgstr "Üzenet elküldve"
 
 #: app/routes/_website.painting.$id.tsx:185
 msgid "Pošlji povpraševanje"
-msgstr "Send inquiry"
+msgstr "Kérdés küldése"
 
 #: app/routes/_website._index.tsx:145
 msgid "Read more"
@@ -96,28 +90,28 @@ msgstr "Read more"
 
 #: app/routes/_website.contact.tsx:206
 msgid "Send"
-msgstr "Send"
+msgstr "Elküld"
 
 #: app/routes/_website.work.tsx:116
 msgid "Series"
-msgstr "Series"
+msgstr "Sorozat"
 
 #: app/components/LanguageSelector.tsx:24
 msgid "Slovene"
-msgstr "Slovene"
+msgstr "szlovén"
 
 #: app/routes/_website.work.tsx:119
 msgid "Techniques"
-msgstr "Techniques"
+msgstr "Technikák"
 
 #: app/config/nav.config.ts:11
 msgid "Work"
-msgstr "Work"
+msgstr "Munkái"
 
 #: app/routes/_website.work.tsx:111
 msgid "Works"
-msgstr "Works"
+msgstr "Munkái"
 
 #: app/routes/_website.contact.tsx:198
 msgid "Your message"
-msgstr "Your message"
+msgstr "Az Ön üzenete"
