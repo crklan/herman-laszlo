@@ -7,7 +7,7 @@ export const techniqueType = defineType({
   fields: [
     defineField({
       name: 'name',
-      type: 'string',
+      type: 'internationalizedArrayString',
     }),
     defineField({
       name: 'slug',
@@ -15,4 +15,33 @@ export const techniqueType = defineType({
       options: {source: 'name'},
     }),
   ],
+  preview: {
+    select: {
+      name: 'name',
+    },
+    prepare(selection) {
+      const {name} = selection
+
+      // Extract English translation from internationalized array
+      const getLocalizedValue = (
+        internationalizedArray: any[],
+        locale: string,
+      ) => {
+        const localizedItem = internationalizedArray?.find(
+          (item) => item._key === locale,
+        )
+        return (
+          localizedItem?.value ||
+          internationalizedArray?.[0]?.value ||
+          'Untitled'
+        )
+      }
+
+      return {
+        title: Array.isArray(name)
+          ? getLocalizedValue(name, 'en')
+          : name || 'Untitled',
+      }
+    },
+  },
 })

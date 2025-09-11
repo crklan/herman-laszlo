@@ -1,5 +1,9 @@
 import groq from 'groq'
 
+const getLocalizedField = (fieldName: string, fallback = 'en') => {
+  return `coalesce(${fieldName}[_key == $locale][0].value, ${fieldName}[_key == "${fallback}"][0].value, ${fieldName}[0].value)`
+}
+
 export const HOME_QUERY = groq`*[_id == "home"][0]{ title, siteTitle }`
 
 export const RECORDS_QUERY = groq`*[_type == "record"][0...12]|order(title asc){
@@ -42,9 +46,9 @@ export const PAINTING_QUERY = groq`*[_type == "painting" && _id == $id][0]{
   id_,
   _createdAt,
   _updatedAt,
-  title,
-  "series": series->name,
-  "technique": techniques->name
+  "title": ${getLocalizedField('title')},
+  "series": series->{"name": ${getLocalizedField('name')}},
+  "technique": techniques->{"name": ${getLocalizedField('name')}}
 }`
 
 export const PAINTINGS_QUERY = groq`*[_type == "painting"][0...9]{
@@ -52,9 +56,9 @@ export const PAINTINGS_QUERY = groq`*[_type == "painting"][0...9]{
   id_,
   _createdAt,
   _updatedAt,
-  title,
-  "series": series->name,
-  "techniques": techniques->name
+  "title": ${getLocalizedField('title')},
+  "series": series->{"name": ${getLocalizedField('name')}},
+  "techniques": techniques->{"name": ${getLocalizedField('name')}}
 }
 | order(_title asc)`
 
@@ -63,7 +67,7 @@ export const SERIES_QUERY = groq`*[_type == "series"]{
   id_,
   _createdAt,
   _updatedAt,
-  name,
+  "name": ${getLocalizedField('name')},
   "slug": slug.current,
   "cover": *[ _type == "painting" && references(^._id) && featured == true ][0]{image}
 }`
@@ -83,7 +87,7 @@ export const TECHNIQUES_QUERY = groq`*[_type == "technique"]{
   id_,
   _createdAt,
   _updatedAt,
-  name,
+  "name": ${getLocalizedField('name')},
   "slug": slug.current,
   "cover": *[ _type == "painting" && references(^._id) ][0]{image}
 }`
@@ -101,13 +105,13 @@ export const TECHNIQUES_QUERY = groq`*[_type == "technique"]{
 export const PAGINATED_SERIES_PAINTINGS_QUERY = groq`*[_type == "series" && _id == $seriesId][0] {
   "paintings": *[_type == "painting" && references(^._id)] | order(_createdAt desc) [$offset...$offset + $limit] {
     _id,
-    title,
+    "title": ${getLocalizedField('title')},
     image,
     technique,
     width,
     height,
     year,
-    "series": series->name
+    "series": series->{"name": ${getLocalizedField('name')}}
   }
 }`
 
@@ -115,31 +119,31 @@ export const PAGINATED_SERIES_PAINTINGS_QUERY = groq`*[_type == "series" && _id 
 export const PAGINATED_TECHNIQUE_PAINTINGS_QUERY = groq`*[_type == "technique" && _id == $techniqueId][0] {
   "paintings": *[_type == "painting" && references(^._id)] | order(_createdAt desc) [$offset...$offset + $limit] {
     _id,
-    title,
+    "title": ${getLocalizedField('title')},
     image,
     technique,
     width,
     height,
     year,
-    "series": series->name
+    "series": series->{"name": ${getLocalizedField('name')}}
   }
 }`
 
 // Keep the existing SERIE_QUERY and TEHNIQUE_QUERY for initial loads
 export const SERIE_QUERY = `*[_type == "series" && _id == $id][0] {
   _id,
-  name,
-  description,
+  "name": ${getLocalizedField('name')},
+  "description": ${getLocalizedField('description')},
   cover,
   "paintings": *[_type == "painting" && references(^._id)] | order(_createdAt desc) [0...20] {
     _id,
-    title,
+    "title": ${getLocalizedField('title')},
     image,
     technique,
     width,
     height,
     year,
-    "series": series->name
+    "series": series->{"name": ${getLocalizedField('name')}}
   },
   "totalCount": count(*[_type == "painting" && references(^._id)])
 }`
@@ -147,18 +151,18 @@ export const SERIE_QUERY = `*[_type == "series" && _id == $id][0] {
 // Update TEHNIQUE_QUERY to also include totalCount
 export const TEHNIQUE_QUERY = groq`*[_type == "technique" && _id == $id][0] {
   _id,
-  name,
+  "name": ${getLocalizedField('name')},
   description,
   "slug": slug.current,
   "paintings": *[_type == "painting" && references(^._id)] | order(_createdAt desc) [0...20] {
     _id,
-    title,
+    "title": ${getLocalizedField('title')},
     image,
     technique,
     width,
     height,
     year,
-    "series": series->name
+    "series": series->{"name": ${getLocalizedField('name')}}
   },
   "totalCount": count(*[_type == "painting" && references(^._id)])
 }`

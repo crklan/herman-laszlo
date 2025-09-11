@@ -3,8 +3,12 @@ export const paintingZ = z.object({
   _id: z.string(),
   title: z.string().nullable(),
   slug: z.string().nullable(),
-  technique: z.string().nullable(),
-  series: z.string().nullable(),
+  technique: z.object({
+    name: z.string().nullable(),
+  }),
+  series: z.object({
+    name: z.string().nullable(),
+  }),
   height: z.number().nullable(),
   width: z.number().nullable(),
   year: z.number().nullable(),
