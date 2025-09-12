@@ -106,11 +106,11 @@ msgstr "Technikák"
 
 #: app/config/nav.config.ts:11
 msgid "Work"
-msgstr "Munkái"
+msgstr "Alkotások"
 
 #: app/routes/_website.work.tsx:111
 msgid "Works"
-msgstr "Munkái"
+msgstr "Alkotások"
 
 #: app/routes/_website.contact.tsx:198
 msgid "Your message"
