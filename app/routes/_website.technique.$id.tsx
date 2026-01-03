@@ -6,17 +6,17 @@ import imageUrlBuilder from '@sanity/image-url'
 import {useQuery} from '@sanity/react-loader'
 import groq from 'groq'
 import {ArrowLeft} from 'lucide-react'
+import {serverOnly$} from 'vite-env-only/macros'
 
 import {Mansory} from '~/components/Mansory'
 import {Button} from '~/components/ui/button'
+import {linguiServer} from '~/modules/lingui/lingui.server'
 import {viewClient} from '~/sanity/client.server'
 import {loadQuery} from '~/sanity/loader.server'
 import {loadQueryOptions} from '~/sanity/loadQueryOptions.server'
 import {dataset, projectId} from '~/sanity/projectDetails'
 import {TEHNIQUE_QUERY} from '~/sanity/queries'
 import type {Technique} from '~/types/technique'
-import {serverOnly$} from 'vite-env-only/macros'
-import {linguiServer} from '~/modules/lingui/lingui.server'
 
 export const meta: MetaFunction<typeof loader> = ({data, location}) => {
   if (!data?.initial?.data) {
