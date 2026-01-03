@@ -1,3 +1,4 @@
+import type {SEOHandle} from '@nasa-gcn/remix-seo'
 import type {LinksFunction, MetaFunction} from '@remix-run/node'
 import {Studio} from 'sanity'
 
@@ -5,7 +6,6 @@ import {Hydrated} from '~/components/Hydrated'
 import studio from '~/styles/studio.css?url'
 
 import config from '../../sanity.config'
-import type {SEOHandle} from '@nasa-gcn/remix-seo'
 
 export const meta: MetaFunction = () => [
   {title: 'Sanity Studio'},

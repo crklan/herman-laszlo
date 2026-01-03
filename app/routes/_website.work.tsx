@@ -2,15 +2,16 @@ import {Trans} from '@lingui/react/macro'
 import type {LoaderFunctionArgs, MetaFunction} from '@remix-run/node'
 import {useLoaderData} from '@remix-run/react'
 import {useQuery} from '@sanity/react-loader'
+
 import {SeriesPreview} from '~/components/SeriesPreview'
 import {TechniquePreview} from '~/components/TechniquePreview'
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '~/components/ui/tabs'
+import {linguiServer} from '~/modules/lingui/lingui.server'
 import {loadQuery} from '~/sanity/loader.server'
 import {loadQueryOptions} from '~/sanity/loadQueryOptions.server'
 import {SERIES_QUERY, TECHNIQUES_QUERY} from '~/sanity/queries'
 import type {Serie} from '~/types/series'
 import type {Technique} from '~/types/technique'
-import {linguiServer} from '~/modules/lingui/lingui.server'
 
 export const meta: MetaFunction = ({location}) => {
   const title = 'Works | László Herman'

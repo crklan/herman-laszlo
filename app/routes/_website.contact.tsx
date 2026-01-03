@@ -13,11 +13,10 @@ import {toast} from 'sonner'
 
 import portrait from '~/assets/portrait.jpeg'
 import {Button} from '~/components/ui/button'
+import {Input} from '~/components/ui/input'
 import {Label} from '~/components/ui/label'
+import {Textarea} from '~/components/ui/textarea'
 import type {loader as layoutLoader} from '~/routes/_website'
-
-import {Input} from '../components/ui/input'
-import {Textarea} from '../components/ui/textarea'
 
 export const meta: MetaFunction<
   typeof loader,
