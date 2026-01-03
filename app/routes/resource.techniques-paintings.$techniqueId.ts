@@ -2,11 +2,11 @@ import type {SEOHandle} from '@nasa-gcn/remix-seo'
 import type {LoaderFunctionArgs} from '@remix-run/node'
 import {json} from '@remix-run/node'
 
+import {linguiServer} from '~/modules/lingui/lingui.server'
 import {loadQuery} from '~/sanity/loader.server'
 import {loadQueryOptions} from '~/sanity/loadQueryOptions.server'
 import {PAGINATED_TECHNIQUE_PAINTINGS_QUERY} from '~/sanity/queries'
 import type {Painting} from '~/types/painting'
-import {linguiServer} from '~/modules/lingui/lingui.server'
 
 export const loader = async ({params, request}: LoaderFunctionArgs) => {
   const url = new URL(request.url)

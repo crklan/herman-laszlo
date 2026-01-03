@@ -6,12 +6,12 @@ import {useQuery} from '@sanity/react-loader'
 import background from '~/assets/background.avif'
 import portrait from '~/assets/new-portrait.jpeg'
 import {Button} from '~/components/ui/button'
+import {linguiServer} from '~/modules/lingui/lingui.server'
 import type {loader as layoutLoader} from '~/routes/_website'
 import {loadQuery} from '~/sanity/loader.server'
 import {loadQueryOptions} from '~/sanity/loadQueryOptions.server'
 import {PAINTINGS_QUERY} from '~/sanity/queries'
 import type {Painting} from '~/types/painting'
-import {linguiServer} from '~/modules/lingui/lingui.server'
 
 export const meta: MetaFunction<
   typeof loader,

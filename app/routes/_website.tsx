@@ -6,13 +6,13 @@ import {lazy, Suspense} from 'react'
 
 import {Footer} from '~/components/Footer'
 import {Header} from '~/components/Header'
+import {linguiServer} from '~/modules/lingui/lingui.server'
 import {loadQuery} from '~/sanity/loader.server'
 import {loadQueryOptions} from '~/sanity/loadQueryOptions.server'
 import {HOME_QUERY} from '~/sanity/queries'
 import type {HomeDocument} from '~/types/home'
 import {homeZ} from '~/types/home'
 import type {ThemePreference} from '~/types/themePreference'
-import {linguiServer} from '~/modules/lingui/lingui.server'
 
 const SanityLiveMode = lazy(() =>
   import('~/components/SanityLiveMode').then((module) => ({
