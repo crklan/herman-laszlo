@@ -1,22 +1,22 @@
 import {Trans} from '@lingui/react/macro'
 import type {SEOHandle} from '@nasa-gcn/remix-seo'
 import type {LoaderFunctionArgs, MetaFunction} from '@remix-run/node'
-import {useLoaderData, useNavigate} from '@remix-run/react'
+import {Link, useLoaderData, useNavigate} from '@remix-run/react'
 import imageUrlBuilder from '@sanity/image-url'
 import {useQuery} from '@sanity/react-loader'
 import groq from 'groq'
-import {ArrowLeft} from 'lucide-react'
+import {ArrowLeft, Tv} from 'lucide-react'
 import {serverOnly$} from 'vite-env-only/macros'
 
 import {Mansory} from '~/components/Mansory'
 import {Button} from '~/components/ui/button'
+import {linguiServer} from '~/modules/lingui/lingui.server'
 import {viewClient} from '~/sanity/client.server'
 import {loadQuery} from '~/sanity/loader.server'
 import {loadQueryOptions} from '~/sanity/loadQueryOptions.server'
 import {dataset, projectId} from '~/sanity/projectDetails'
 import {SERIE_QUERY} from '~/sanity/queries'
 import type {Serie} from '~/types/series'
-import {linguiServer} from '~/modules/lingui/lingui.server'
 
 export const meta: MetaFunction<typeof loader> = ({data, location}) => {
   if (!data?.initial?.data) {
