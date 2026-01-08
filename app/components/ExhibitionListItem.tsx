@@ -52,6 +52,7 @@ export const ExhibitionListItem = ({exhibition}: ExhibitionListItemProps) => {
               .width(300)
               .height(200)
               .quality(80)
+              .auto('format')
               .url()}
             alt={exhibition.title || 'Exhibition'}
             className="w-full md:w-[300px] h-[200px] object-cover rounded-lg"

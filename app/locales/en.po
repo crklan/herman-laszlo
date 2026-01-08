@@ -18,29 +18,38 @@ msgstr ""
 msgid "{0}"
 msgstr ""
 
-#: app/routes/_website.about.tsx:82
+#: app/config/nav.config.ts:13
 #: app/routes/_website._index.tsx:128
-#: app/config/nav.config.ts:12
+#: app/routes/_website.about.tsx:82
 msgid "About"
 msgstr "About"
 
-#: app/routes/_website.technique.$id.tsx:156
+#: app/routes/_website.exhibition.$id.tsx:131
+#: app/routes/_website.painting.$id.tsx:171
 #: app/routes/_website.series.$id.tsx:152
-#: app/routes/_website.painting.$id.tsx:167
+#: app/routes/_website.technique.$id.tsx:156
 msgid "Back"
 msgstr "Back"
 
-#: app/routes/_website.contact.tsx:149
-#: app/config/nav.config.ts:13
+#: app/config/nav.config.ts:14
+#: app/routes/_website.contact.tsx:148
 msgid "Contact"
 msgstr "Contact"
 
-#: app/routes/_website.contact.tsx:152
+#: app/routes/_website.contact.tsx:151
 msgid "Contact us via mail or fill the form bellow."
 msgstr "Contact us via mail or fill the form bellow."
 
-#: app/routes/_website.contact.tsx:186
-#: app/routes/_website.contact.tsx:188
+#: app/routes/_website.exhibitions.tsx:84
+msgid "Current"
+msgstr "Current"
+
+#: app/routes/_website.exhibitions.tsx:75
+#~ msgid "Current Exhibitions"
+#~ msgstr "Current Exhibitions"
+
+#: app/routes/_website.contact.tsx:185
+#: app/routes/_website.contact.tsx:187
 msgid "Email"
 msgstr "Email"
 
@@ -48,8 +57,25 @@ msgstr "Email"
 msgid "English"
 msgstr "English"
 
-#: app/routes/_website.contact.tsx:174
-#: app/routes/_website.contact.tsx:176
+#: app/routes/_website.exhibition.$id.tsx:204
+msgid "Exhibition Gallery"
+msgstr "Exhibition Gallery"
+
+#: app/routes/_website.exhibition.$id.tsx:252
+msgid "Exhibition Video"
+msgstr "Exhibition Video"
+
+#: app/config/nav.config.ts:12
+#: app/routes/_website.exhibitions.tsx:71
+msgid "Exhibitions"
+msgstr "Exhibitions"
+
+#: app/routes/_website.exhibition.$id.tsx:161
+msgid "Featured Series"
+msgstr "Featured Series"
+
+#: app/routes/_website.contact.tsx:173
+#: app/routes/_website.contact.tsx:175
 msgid "First name"
 msgstr "First name"
 
@@ -61,8 +87,8 @@ msgstr "Home"
 msgid "Hungarian"
 msgstr "Hungarian"
 
-#: app/routes/_website.contact.tsx:180
-#: app/routes/_website.contact.tsx:182
+#: app/routes/_website.contact.tsx:179
+#: app/routes/_website.contact.tsx:181
 msgid "Last name"
 msgstr "Last name"
 
@@ -74,19 +100,39 @@ msgstr "László Herman was born in 1961 in Gornji Lakos, Lendava.  He grew up i
 msgid "László Herman se je rodil leta 1961 v Gornjem Lakošu, v Lendavi. Na začetku svoje umetniške poti je imela velik vpliv nanj fotografska umetnost, kasneje pa se je njegovo zanimanje preusmerilo k slikarstvu. Njegovi slikarski podvigi in študije obsegajo širok tematski in motivni spekter: zgodovino, znanstveno-tehnično revolucijo, manjšinsko bit, poglavja iz zgodovine lastne družine, brezizhodnost malega človeka, ki je žrtev političnih manipulacij in refleksije na globalizacijsko soodvisnost ..."
 msgstr "László Herman was born in 1961 in Gornji Lakos, Lendava. At the beginning of his artistic career, he was strongly influenced by the art of photography, but later his interest turned to painting. His painting ventures and studies cover a wide range of themes and motifs: history, the scientific-technical revolution, the minority bit, chapters from his own family history, the impasse of the little man who is a victim of political manipulation and reflections on globalisation interdependence..."
 
-#: app/routes/_website.contact.tsx:192
+#: app/routes/_website.contact.tsx:191
 msgid "Message"
 msgstr "Message"
 
-#: app/routes/_website.contact.tsx:132
+#: app/routes/_website.contact.tsx:131
 msgid "Message not sent. Please try again."
 msgstr "Message not sent. Please try again."
 
-#: app/routes/_website.contact.tsx:130
+#: app/routes/_website.contact.tsx:129
 msgid "Message sent"
 msgstr "Message sent"
 
-#: app/routes/_website.painting.$id.tsx:185
+#: app/routes/_website.exhibitions.tsx:102
+msgid "No current exhibitions."
+msgstr "No current exhibitions."
+
+#: app/routes/_website.exhibitions.tsx:76
+msgid "No exhibitions found."
+msgstr "No exhibitions found."
+
+#: app/routes/_website.exhibitions.tsx:118
+msgid "No past exhibitions."
+msgstr "No past exhibitions."
+
+#: app/routes/_website.exhibitions.tsx:87
+msgid "Past"
+msgstr "Past"
+
+#: app/routes/_website.exhibitions.tsx:91
+#~ msgid "Past Exhibitions"
+#~ msgstr "Past Exhibitions"
+
+#: app/routes/_website.painting.$id.tsx:192
 msgid "Pošlji povpraševanje"
 msgstr "Send inquiry"
 
@@ -94,11 +140,11 @@ msgstr "Send inquiry"
 msgid "Read more"
 msgstr "Read more"
 
-#: app/routes/_website.contact.tsx:206
+#: app/routes/_website.contact.tsx:205
 msgid "Send"
 msgstr "Send"
 
-#: app/routes/_website.work.tsx:116
+#: app/routes/_website.work.tsx:117
 msgid "Series"
 msgstr "Series"
 
@@ -106,7 +152,7 @@ msgstr "Series"
 msgid "Slovene"
 msgstr "Slovene"
 
-#: app/routes/_website.work.tsx:119
+#: app/routes/_website.work.tsx:120
 msgid "Techniques"
 msgstr "Techniques"
 
@@ -114,38 +160,10 @@ msgstr "Techniques"
 msgid "Work"
 msgstr "Work"
 
-#: app/routes/_website.work.tsx:111
+#: app/routes/_website.work.tsx:112
 msgid "Works"
 msgstr "Works"
 
-#: app/routes/_website.contact.tsx:198
+#: app/routes/_website.contact.tsx:197
 msgid "Your message"
 msgstr "Your message"
-
-#: app/config/nav.config.ts:12
-msgid "Exhibitions"
-msgstr "Exhibitions"
-
-#: app/routes/_website.exhibitions.tsx:75
-msgid "Current Exhibitions"
-msgstr "Current Exhibitions"
-
-#: app/routes/_website.exhibitions.tsx:91
-msgid "Past Exhibitions"
-msgstr "Past Exhibitions"
-
-#: app/routes/_website.exhibition.$id.tsx:145
-msgid "Featured Series"
-msgstr "Featured Series"
-
-#: app/routes/_website.exhibition.$id.tsx:165
-msgid "Exhibition Gallery"
-msgstr "Exhibition Gallery"
-
-#: app/routes/_website.exhibition.$id.tsx:192
-msgid "Exhibition Video"
-msgstr "Exhibition Video"
-
-#: app/routes/_website.exhibitions.tsx:106
-msgid "No exhibitions found."
-msgstr "No exhibitions found."

@@ -18,29 +18,38 @@ msgstr ""
 msgid "{0}"
 msgstr ""
 
-#: app/routes/_website.about.tsx:82
+#: app/config/nav.config.ts:13
 #: app/routes/_website._index.tsx:128
-#: app/config/nav.config.ts:12
+#: app/routes/_website.about.tsx:82
 msgid "About"
 msgstr "O slikarju"
 
-#: app/routes/_website.technique.$id.tsx:156
+#: app/routes/_website.exhibition.$id.tsx:131
+#: app/routes/_website.painting.$id.tsx:171
 #: app/routes/_website.series.$id.tsx:152
-#: app/routes/_website.painting.$id.tsx:167
+#: app/routes/_website.technique.$id.tsx:156
 msgid "Back"
 msgstr "Nazaj"
 
-#: app/routes/_website.contact.tsx:149
-#: app/config/nav.config.ts:13
+#: app/config/nav.config.ts:14
+#: app/routes/_website.contact.tsx:148
 msgid "Contact"
 msgstr "Kontakt"
 
-#: app/routes/_website.contact.tsx:152
+#: app/routes/_website.contact.tsx:151
 msgid "Contact us via mail or fill the form bellow."
 msgstr "Kontaktirajte nas preko spletne pošte ali preko spodnjega obrazca."
 
-#: app/routes/_website.contact.tsx:186
-#: app/routes/_website.contact.tsx:188
+#: app/routes/_website.exhibitions.tsx:84
+msgid "Current"
+msgstr "Trenutne"
+
+#: app/routes/_website.exhibitions.tsx:75
+#~ msgid "Current Exhibitions"
+#~ msgstr "Trenutne razstave"
+
+#: app/routes/_website.contact.tsx:185
+#: app/routes/_website.contact.tsx:187
 msgid "Email"
 msgstr "Email"
 
@@ -48,8 +57,25 @@ msgstr "Email"
 msgid "English"
 msgstr "Angleščina"
 
-#: app/routes/_website.contact.tsx:174
-#: app/routes/_website.contact.tsx:176
+#: app/routes/_website.exhibition.$id.tsx:204
+msgid "Exhibition Gallery"
+msgstr "Galerija razstave"
+
+#: app/routes/_website.exhibition.$id.tsx:252
+msgid "Exhibition Video"
+msgstr "Video razstave"
+
+#: app/config/nav.config.ts:12
+#: app/routes/_website.exhibitions.tsx:71
+msgid "Exhibitions"
+msgstr "Razstave"
+
+#: app/routes/_website.exhibition.$id.tsx:161
+msgid "Featured Series"
+msgstr "Predstavljene serije"
+
+#: app/routes/_website.contact.tsx:173
+#: app/routes/_website.contact.tsx:175
 msgid "First name"
 msgstr "Ime"
 
@@ -61,8 +87,8 @@ msgstr "Domov"
 msgid "Hungarian"
 msgstr "Madžarsko"
 
-#: app/routes/_website.contact.tsx:180
-#: app/routes/_website.contact.tsx:182
+#: app/routes/_website.contact.tsx:179
+#: app/routes/_website.contact.tsx:181
 msgid "Last name"
 msgstr "Priimek"
 
@@ -74,31 +100,51 @@ msgstr ""
 msgid "László Herman se je rodil leta 1961 v Gornjem Lakošu, v Lendavi. Na začetku svoje umetniške poti je imela velik vpliv nanj fotografska umetnost, kasneje pa se je njegovo zanimanje preusmerilo k slikarstvu. Njegovi slikarski podvigi in študije obsegajo širok tematski in motivni spekter: zgodovino, znanstveno-tehnično revolucijo, manjšinsko bit, poglavja iz zgodovine lastne družine, brezizhodnost malega človeka, ki je žrtev političnih manipulacij in refleksije na globalizacijsko soodvisnost ..."
 msgstr ""
 
-#: app/routes/_website.contact.tsx:192
+#: app/routes/_website.contact.tsx:191
 msgid "Message"
 msgstr "Sporočilo"
 
-#: app/routes/_website.contact.tsx:132
+#: app/routes/_website.contact.tsx:131
 msgid "Message not sent. Please try again."
 msgstr "Sporočilo ni bilo poslano. Poskusite ponovno."
 
-#: app/routes/_website.contact.tsx:130
+#: app/routes/_website.contact.tsx:129
 msgid "Message sent"
 msgstr "Sporočilo poslano"
 
-#: app/routes/_website.painting.$id.tsx:185
+#: app/routes/_website.exhibitions.tsx:102
+msgid "No current exhibitions."
+msgstr "Ni trenutnih razstav."
+
+#: app/routes/_website.exhibitions.tsx:76
+msgid "No exhibitions found."
+msgstr "Razstav ni bilo mogoče najti."
+
+#: app/routes/_website.exhibitions.tsx:118
+msgid "No past exhibitions."
+msgstr "Ni preteklih razstav."
+
+#: app/routes/_website.exhibitions.tsx:87
+msgid "Past"
+msgstr "Pretekle"
+
+#: app/routes/_website.exhibitions.tsx:91
+#~ msgid "Past Exhibitions"
+#~ msgstr "Pretekle razstave"
+
+#: app/routes/_website.painting.$id.tsx:192
 msgid "Pošlji povpraševanje"
-msgstr ""
+msgstr "Pošlji povpraševanje"
 
 #: app/routes/_website._index.tsx:145
 msgid "Read more"
 msgstr "Preberi več"
 
-#: app/routes/_website.contact.tsx:206
+#: app/routes/_website.contact.tsx:205
 msgid "Send"
 msgstr "Pošlji"
 
-#: app/routes/_website.work.tsx:116
+#: app/routes/_website.work.tsx:117
 msgid "Series"
 msgstr "Serije"
 
@@ -106,7 +152,7 @@ msgstr "Serije"
 msgid "Slovene"
 msgstr "Slovenščina"
 
-#: app/routes/_website.work.tsx:119
+#: app/routes/_website.work.tsx:120
 msgid "Techniques"
 msgstr "Tehnike"
 
@@ -114,38 +160,10 @@ msgstr "Tehnike"
 msgid "Work"
 msgstr "Dela"
 
-#: app/routes/_website.work.tsx:111
+#: app/routes/_website.work.tsx:112
 msgid "Works"
 msgstr "Dela"
 
-#: app/routes/_website.contact.tsx:198
+#: app/routes/_website.contact.tsx:197
 msgid "Your message"
 msgstr "Vaše sporočilo"
-
-#: app/config/nav.config.ts:12
-msgid "Exhibitions"
-msgstr "Razstave"
-
-#: app/routes/_website.exhibitions.tsx:75
-msgid "Current Exhibitions"
-msgstr "Trenutne razstave"
-
-#: app/routes/_website.exhibitions.tsx:91
-msgid "Past Exhibitions"
-msgstr "Pretekle razstave"
-
-#: app/routes/_website.exhibition.$id.tsx:145
-msgid "Featured Series"
-msgstr "Predstavljene serije"
-
-#: app/routes/_website.exhibition.$id.tsx:165
-msgid "Exhibition Gallery"
-msgstr "Galerija razstave"
-
-#: app/routes/_website.exhibition.$id.tsx:192
-msgid "Exhibition Video"
-msgstr "Video razstave"
-
-#: app/routes/_website.exhibitions.tsx:106
-msgid "No exhibitions found."
-msgstr "Razstav ni bilo mogoče najti."
