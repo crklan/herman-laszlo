@@ -115,3 +115,31 @@ msgstr "Alkotások"
 #: app/routes/_website.contact.tsx:198
 msgid "Your message"
 msgstr "Az Ön üzenete"
+
+#: app/config/nav.config.ts:12
+msgid "Exhibitions"
+msgstr "Kiállítások"
+
+#: app/routes/_website.exhibitions.tsx:75
+msgid "Current Exhibitions"
+msgstr "Jelenlegi kiállítások"
+
+#: app/routes/_website.exhibitions.tsx:91
+msgid "Past Exhibitions"
+msgstr "Múltbeli kiállítások"
+
+#: app/routes/_website.exhibition.$id.tsx:145
+msgid "Featured Series"
+msgstr "Kiemelt sorozatok"
+
+#: app/routes/_website.exhibition.$id.tsx:165
+msgid "Exhibition Gallery"
+msgstr "Kiállítási galéria"
+
+#: app/routes/_website.exhibition.$id.tsx:192
+msgid "Exhibition Video"
+msgstr "Kiállítási videó"
+
+#: app/routes/_website.exhibitions.tsx:106
+msgid "No exhibitions found."
+msgstr "Nem találhatók kiállítások."

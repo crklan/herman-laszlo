@@ -166,3 +166,37 @@ export const TEHNIQUE_QUERY = groq`*[_type == "technique" && _id == $id][0] {
   },
   "totalCount": count(*[_type == "painting" && references(^._id)])
 }`
+
+export const EXHIBITIONS_QUERY = groq`*[_type == "exhibition"] | order(startDate desc) {
+  _id,
+  _createdAt,
+  _updatedAt,
+  "title": ${getLocalizedField('title')},
+  "description": ${getLocalizedField('description')},
+  "slug": slug.current,
+  startDate,
+  endDate,
+  location,
+  coverImage,
+  "relatedSeries": relatedSeries[]->{"name": ${getLocalizedField('name')}, _id}
+}`
+
+export const EXHIBITION_QUERY = groq`*[_type == "exhibition" && _id == $id][0] {
+  _id,
+  _createdAt,
+  _updatedAt,
+  "title": ${getLocalizedField('title')},
+  "description": ${getLocalizedField('description')},
+  "slug": slug.current,
+  startDate,
+  endDate,
+  location,
+  coverImage,
+  exhibitionPhotos[]{
+    asset,
+    alt,
+    "caption": caption[_key == $locale][0].value
+  },
+  videoUrl,
+  "relatedSeries": relatedSeries[]->{"name": ${getLocalizedField('name')}, _id, "slug": slug.current}
+}`

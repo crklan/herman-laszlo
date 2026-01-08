@@ -121,3 +121,31 @@ msgstr "Dela"
 #: app/routes/_website.contact.tsx:198
 msgid "Your message"
 msgstr "Vaše sporočilo"
+
+#: app/config/nav.config.ts:12
+msgid "Exhibitions"
+msgstr "Razstave"
+
+#: app/routes/_website.exhibitions.tsx:75
+msgid "Current Exhibitions"
+msgstr "Trenutne razstave"
+
+#: app/routes/_website.exhibitions.tsx:91
+msgid "Past Exhibitions"
+msgstr "Pretekle razstave"
+
+#: app/routes/_website.exhibition.$id.tsx:145
+msgid "Featured Series"
+msgstr "Predstavljene serije"
+
+#: app/routes/_website.exhibition.$id.tsx:165
+msgid "Exhibition Gallery"
+msgstr "Galerija razstave"
+
+#: app/routes/_website.exhibition.$id.tsx:192
+msgid "Exhibition Video"
+msgstr "Video razstave"
+
+#: app/routes/_website.exhibitions.tsx:106
+msgid "No exhibitions found."
+msgstr "Razstav ni bilo mogoče najti."

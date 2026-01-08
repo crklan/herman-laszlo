@@ -1,4 +1,4 @@
-import {Home, Image, Tags, Users} from 'lucide-react'
+import {Calendar, Home, Image, Tags, Users} from 'lucide-react'
 import type {
   DefaultDocumentNodeResolver,
   StructureResolver,
@@ -24,6 +24,7 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem('painting').title('Paintings').icon(Image),
       S.documentTypeListItem('series').title('Series').icon(Users),
       S.documentTypeListItem('technique').title('Techniques').icon(Tags),
+      S.documentTypeListItem('exhibition').title('Exhibitions').icon(Calendar),
     ])
 
 export const defaultDocumentNode: DefaultDocumentNodeResolver = (
