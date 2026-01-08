@@ -9,6 +9,7 @@ export type Navigation = {
 export const navigation = [
   {title: msg`Home`, path: '/'},
   {title: msg`Work`, path: '/work'},
+  {title: msg`Exhibitions`, path: '/exhibitions'},
   {title: msg`About`, path: '/about'},
   {title: msg`Contact`, path: '/contact'},
 ]

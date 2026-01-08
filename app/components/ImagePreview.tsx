@@ -97,7 +97,7 @@ export const ImagePreview = ({
       <img
         alt="Preview"
         className="not-prose max-h-[500px] rounded-lg ring-4 ring-gray-400"
-        src={builder.image(data.image).quality(40).fit('max').url()}
+        src={builder.image(data.image).quality(40).fit('max').auto('format').url()}
       />
     </Link>
   )

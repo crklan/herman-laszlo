@@ -21,6 +21,7 @@ export const TechniquePreview = ({data}: {data: Technique}) => {
             .width(400)
             .height(400)
             .quality(40)
+            .auto('format')
             .url()}
         />
       ) : (
