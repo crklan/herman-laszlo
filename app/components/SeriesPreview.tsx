@@ -23,6 +23,7 @@ export const SeriesPreview = ({data}: {data: Serie}) => {
             .width(400)
             .height(400)
             .quality(40)
+            .auto('format')
             .url()}
         />
       ) : (

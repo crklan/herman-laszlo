@@ -1,4 +1,5 @@
 import {artistType} from '~/sanity/schemaTypes/artistType'
+import {exhibitionType} from '~/sanity/schemaTypes/exhibitionType'
 import {genreType} from '~/sanity/schemaTypes/genreType'
 import {homeType} from '~/sanity/schemaTypes/homeType'
 import {paintingType} from '~/sanity/schemaTypes/paintingType'
@@ -9,6 +10,7 @@ import {trackType} from '~/sanity/schemaTypes/trackType'
 
 export default [
   artistType,
+  exhibitionType,
   genreType,
   homeType,
   recordType,

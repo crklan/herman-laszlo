@@ -5,7 +5,8 @@ import {useLoaderData, useNavigate} from '@remix-run/react'
 import imageUrlBuilder from '@sanity/image-url'
 import {useQuery} from '@sanity/react-loader'
 import groq from 'groq'
-import {ArrowLeft} from 'lucide-react'
+import {ArrowLeft, X} from 'lucide-react'
+import {useState} from 'react'
 import {serverOnly$} from 'vite-env-only/macros'
 
 import {ImagePreview} from '~/components/ImagePreview'
@@ -40,6 +41,7 @@ export const meta: MetaFunction<typeof loader> = ({data, location, params}) => {
         .height(630)
         .quality(80)
         .fit('crop')
+        .auto('format')
         .url()
     : null
 
@@ -154,6 +156,8 @@ export default function Index() {
     initial,
   })
   const navigate = useNavigate()
+  const builder = imageUrlBuilder({projectId, dataset})
+  const [showLightbox, setShowLightbox] = useState(false)
   const goBack = () => navigate(-1)
 
   return (
@@ -168,7 +172,10 @@ export default function Index() {
       </Button>
       <div className="flex flex-col text-center px-12 py-4 lg:px-24 xl:px-44 lg:py-2">
         <div className="grid grid-cols-12 lg:gap-16 w-full lg:min-h-[500px]">
-          <div className="col-span-12 lg:col-span-6 flex items-center justify-center">
+          <div
+            className="col-span-12 lg:col-span-6 flex items-center justify-center cursor-pointer"
+            onClick={() => setShowLightbox(true)}
+          >
             <ImagePreview isPreview={true} data={data as Painting} />
           </div>
           <div className="col-span-12 lg:col-span-6 flex flex-col justify-center items-start gap-1 mt-12 lg:mt-0">
@@ -188,6 +195,32 @@ export default function Index() {
           </div>
         </div>
       </div>
+
+      {/* Image Lightbox */}
+      {showLightbox && data?.image && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setShowLightbox(false)}
+        >
+          <button
+            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
+            onClick={() => setShowLightbox(false)}
+          >
+            <X className="h-8 w-8" />
+          </button>
+          <img
+            src={builder
+              .image(data.image)
+              .width(1920)
+              .quality(90)
+              .auto('format')
+              .url()}
+            alt={data.title || 'Painting'}
+            className="max-w-full max-h-full object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </>
   )
 }
